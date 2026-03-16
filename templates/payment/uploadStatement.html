@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Statement</title>
+    <link rel="icon" href="{% static "/images/TabLogo.png" %}?v=2" type="image/x-icon">
+    <link rel="stylesheet" href="{% static "StatementStyle.css" %}" />
+    <link rel="stylesheet" href="{% static "/bootstrap/bootstrap.min.css" %}" />
+  </head>
+  <body>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div id="uploadForm" class="text-center p-4 border rounded">
+            <h1>Upload Statement</h1>
+            <input required type="file" class="form-control my-3" accept=".xls, .xlsx, .csv, .pdf">
+            <button type="submit" class="btn btn-primary btn-block" onclick="showLoadingScreen()">Upload</button>
+        </div>
+        <div id="loadingScreen" class="text-center" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only"></span>
+            </div>
+            <p class="mt-3">Processing your file, please wait...</p>
+        </div>
+    </div>
+
+    <script>
+      function showLoadingScreen() {
+        document.getElementById('uploadForm').style.display = 'none';
+        document.getElementById('loadingScreen').style.display = 'block';
+        setTimeout(() => {
+            window.location.href = 'https://www.youtube.com/';
+        }, 8000); // Simulates an 8-second loading process
+    }
+    </script>
+
+    <script src="{% static "bootstrap/bootstrap.min.js" %}"></script>
+  </body>
+</html>

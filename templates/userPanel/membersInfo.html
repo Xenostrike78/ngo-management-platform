@@ -1,0 +1,242 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UGMT | {{ memberData.name }}</title>
+    <!-- Bootstrap 5 CSS -->
+    <link rel="icon" href="{% static "/images/TabLogo.png" %}?v=2" type="image/x-icon">
+    <link rel="stylesheet" href="{% static "/bootstrap/bootstrap.min.css" %}" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static "NavbarStyle.css" %}" />
+    <link rel="stylesheet" href="{% static "bottomBarStyle.css" %}" />
+    <link rel="stylesheet" href="{% static "profilestyle.css" %}?v=12" />
+    <link rel="stylesheet" href="{% static "profilestyleAddon.css" %}?v=2" /> 
+  </head>
+  <body>
+    <script>
+      function closeTab() {
+          window.close();
+      }
+    </script> 
+    <!-- Close Button -->
+    <a
+      href="#" onclick="closeTab()"
+      style="
+        text-decoration: none;
+        color: black;
+        font-size: xx-large;
+        display: inline-block;
+      ">
+      <div class="close-button" style="display: inline-block; width: auto; margin-left: 3%;">
+        &times;
+      </div>
+    </a>
+    <!-- Profile Page -->
+    <div class="container dsBox">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4 text-center">
+            <br>
+            <a href="{{ memberData.profilePic.url }}" target="_blank">
+              <img
+                id="profile-picture-preview"
+                src="{{ memberData.profilePic.url }}"
+                class="img-fluid rounded-start dsProfile"
+                alt="Profile Picture"
+              />
+            </a>
+            <br />
+            <br />
+            <a href="{% url "download_user_data" memberData.id %}">
+              <button class="download-btn">Download Details</button>
+            </a>
+            {% if request.user.is_superuser %}
+            
+          <!-- Addon -->
+          <br>
+          <div class="resignation">
+            <form>
+              <input type="text" placeholder="Cre8Mark" id="textInput" maxlength="20" value="{{ memberData.designation }}" disabled>
+              <button type="button" id="editBtn">Edit</button>
+              <button type="button" id="doneBtn" style="display:none;">Done</button>
+            </form>
+          </div>
+          {% endif %}
+            <br>            
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <div class="YoDsprofile">
+                <span class="profile-name">{{ memberData.name }}</span>
+              </div>          
+              {% if request.user.is_superuser %}    
+              <!-- Changes Start Here -->
+            <br>
+            <br>            
+            <!-- Show on Home / Remove from Home -->
+            
+            <button style="width:170px ;"  type="button" 
+            class="btn {% if memberData.home_flag %}btn-warning{% else %}btn-secondary{% endif %}" 
+            onclick="toggleHome({{ memberData.id }})">
+            {% if memberData.home_flag %} Remove from Home {% else %} Show on Home {% endif %}
+            </button>
+          <br><br>
+          <!-- Admin Toggle -->
+          <button 
+            style="width:170px;"  
+            type="button" 
+            class="btn {% if memberData.is_superuser %}btn-danger{% else %}btn-secondary{% endif %}" 
+            onclick="toggleAdmin({{ memberData.id }})">
+            {% if memberData.is_superuser %} Remove Admin {% else %} Make Admin {% endif %}
+          </button>
+          <br>
+          <br>
+          <!-- Change End Here -->
+           {% endif %}    
+              <p class="card-text" id="user-ID-UGMT"><b>UGMT Member ID: </b><span id="member-id"></span></p>
+              <script>
+                const memberId = {{ memberData.id }}; 
+                const formattedId = "UGMT" + String(memberId).padStart(3, '0');
+                document.getElementById("member-id").textContent = formattedId;
+              </script>
+              <p class="card-text"><b>Date Of Birth: </b>{{ memberData.dob }}</p>
+              <p class="card-text"><b>Email: </b>{{ memberData.email }}</p>
+              <p class="card-text"><b>Blood Group: </b>{{ memberData.blood_group }}</p>
+              <p class="card-text"><b>Gender: </b>{{ memberData.gender }}</p>
+              <p class="card-text"><b>Address: </b>{{ memberData.address }}</p>
+              <p class="card-text"><b>State: </b>{{ memberData.state }}</p>
+              <p class="card-text"><b>District: </b>{{ memberData.district }}</p>
+              <p class="card-text"><b>Zip Code: </b>{{ memberData.zip_code }}</p>
+              <p class="card-text"><b>Mobile: </b>{{ memberData.mobile }}</p>
+              <p class="card-text"><b>Mobile (Home): </b>{{ memberData.mobile_home }}</p>
+              <p class="card-text"><b>Aadhaar Number: </b>{{ memberData.aadhar }}</p>
+              <p class="card-text"><b>Aadhaar Picture: </b><a href="{{ memberData.aadharPhoto.url }}" target="_blank">Click Here</a></p>
+              <h4>Membership Information</h4>
+              <p class="card-text"><b>Register Date: </b>{{ memberData.registerDate }}</p>
+              <p class="card-text"><b>Membership Renewal Date: </b>{{ memberData.expiring_Date }}</p>
+              <p class="card-text"><b>Designation: </b>{{ memberData.designation }}</p>
+              <br>
+              <h4>Nominee Information</h4>
+              <p class="card-text"><b>Name: </b>{{ memberData.nominee1_name }}</p>
+              <p class="card-text"><b>Mobile: </b>{{ memberData.nominee1_mobile }}</p>
+              <p class="card-text"><b>Relation: </b>{{ memberData.nominee1_relation }}</p>
+              <br>
+              <h4>Referral Information</h4>
+              <p class="card-text"><b>Name: </b>{{ memberData.refer_name }}</p>
+              <p class="card-text"><b>Mobile: </b>{{ memberData.refer_mobile }}</p>
+              {% if memberData.refer_id != 'Refer id' %}
+              <p class="card-text" id="user-ID-UGMT-2"><b>Referral ID: </b><span id="member-id-refer"></span></p>
+              <script>
+                const referID = {{ memberData.refer_id }}; 
+                const formattedIdRE = "UGMT" + String(referID).padStart(3, '0');
+                document.getElementById("member-id-refer").textContent = formattedIdRE;
+              </script>
+              {% else %}
+              <p class="card-text"><b>Referral ID: </b>{{ memberData.refer_id }}</p>
+              {% endif %}
+              <br>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="newArea">
+      <small class="Cre8mark">
+        <a class="Cre8markLogo" href="https://www.cre8mark.in/">
+          Developed by CRE8MARK
+        </a>
+      </small>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="{% static "/bootstrap/bootstrap.min.js" %}"></script>
+    <script src="{% static "profileScript.js" %}"></script>
+    
+    <!-- Add This Script -->
+  <script>
+  const input = document.getElementById("textInput");
+  const editBtn = document.getElementById("editBtn");
+  const doneBtn = document.getElementById("doneBtn");
+
+  // When Edit is clicked
+  editBtn.addEventListener("click", () => {
+    input.disabled = false;   // make input editable
+    input.focus();            // focus input
+    editBtn.style.display = "none";
+    doneBtn.style.display = "inline-block";
+  });
+
+  // When Done is clicked
+  doneBtn.addEventListener("click", () => {
+    input.disabled = true;    // disable input again
+    const newDesignation = input.value;
+    const memberID = {{ memberData.id  }};
+    fetch(`/api/update-designation/${memberID}/`,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "X-CSRFToken":"{{csrf_token}}"
+      },
+      body:JSON.stringify({designation:newDesignation})
+    }).then(response => {
+      if (!response.ok) {
+        throw new Error("Failed to update designation");
+      }
+      return response.json();
+    }).then(data => {
+      alert("Designation updated to: " + data.designation);
+      input.disabled = true;
+      doneBtn.style.display = "none";
+      editBtn.style.display = "inline-block";
+    })
+  });
+</script>
+
+<!-- TOGGLE FLAGS -->
+<script>
+  function toggleHome(userId) {
+    fetch(`/make-home-flag/${userId}/`, {
+        method: "POST",
+        headers: {
+            "X-CSRFToken":"{{csrf_token}}",
+            "Content-Type": "application/json"
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === "success") {
+            location.reload();  // reload page to update button text
+        } else {
+            alert("Something went wrong!");
+        }
+    });
+}
+
+function toggleAdmin(userId) {
+    fetch(`/make-admin/${userId}/`, {
+        method: "POST",
+        headers: {
+            "X-CSRFToken":"{{csrf_token}}",
+            "Content-Type": "application/json"
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === "success") {
+            location.reload();
+        } else {
+            alert("Something went wrong!");
+        }
+    });
+}
+</script>
+  </body>
+</html>
+
+

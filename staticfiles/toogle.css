@@ -1,0 +1,36 @@
+.changePage {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.flexByDS {
+  display: inline-flex;
+  border: 2px solid #46a6ff;
+  border-radius: 30px;
+  overflow: hidden; /* makes it a pill shape */
+}
+
+.yo-btn {
+  background: transparent;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #46a6ff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.yo-btn.active {
+  background: #46a6ff;
+  color: #fff;
+}
+
+.yo-btn:hover {
+  background: rgb(53, 126, 194);
+  color: #fff;
+}
+
+.yo-btn:active {
+  transform: scale(0.98);
+}

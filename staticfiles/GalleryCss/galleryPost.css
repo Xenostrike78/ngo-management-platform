@@ -1,0 +1,197 @@
+/* ---------- Details Section ---------- */
+.details {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 15px 20px;
+  text-align: center;
+}
+
+.details .title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.details .date {
+  font-size: 1rem;
+  color: #777;
+}
+
+/* ---------- Swiper Container ---------- */
+.swiper {
+  width: 100%;
+  max-width: 900px;
+  height: 500px;
+  margin: 30px auto;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Slides */
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9f9f9;
+}
+
+/* Images */
+.swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Videos */
+.swiper-slide video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+  outline: none;
+  border-radius: 0;
+}
+
+/* ---------- Pagination Dots ---------- */
+.swiper-pagination-bullet {
+  background: #aaa;
+  opacity: 1;
+  transition: 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+  background: #007bff;
+  transform: scale(1.2);
+}
+
+
+/* Close Btn */
+.close{
+  width: 80%;
+  margin: auto;
+  
+}
+
+
+.dssBackBtn {
+  display: flex;
+  height: 3em;
+  width: 110px;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff; /* Pure white */
+  border-radius: 6px;
+  letter-spacing: 1px;
+  transition: all 0.2s linear;
+  cursor: pointer;
+  border: 1px solid #ddd; /* Light border to make visible */
+  color: #333;
+  font-weight: 500;
+}
+
+.dssBackBtn > svg {
+  margin-right: 6px;
+  margin-left: 6px;
+  font-size: 20px;
+  fill: #333; /* Dark icon for visibility */
+  transition: all 0.4s ease-in;
+}
+
+.dssBackBtn:hover > svg {
+  font-size: 1.2em;
+  transform: translateX(-5px);
+  fill: #0073e6; /* Highlight color on hover */
+}
+
+.dssBackBtn:hover {
+  box-shadow: 6px 6px 20px #d1d1d1, -6px -6px 20px #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Make responsive */
+@media (max-width: 768px) {
+  .swiper {
+    height: 320px;
+  }
+
+  .details .title {
+    font-size: 1.3rem;
+  }
+
+  .details .date {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .swiper {
+    height: 250px;
+    border-radius: 5px;
+  }
+
+  .details .title {
+    font-size: 1.1rem;
+  }
+
+  .dsFrame{
+    margin: auto;
+    text-align: center;
+
+  }
+
+  .close{
+    margin: auto;
+    text-align: center;;
+  }
+
+}
+
+
+/* Fullscreen overlay styles */
+.fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5000;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.fullscreen-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.fullscreen-image {
+  max-width: 100%;
+  max-height: 100%;
+  min-width: 90%;
+  min-height: 90%;
+  object-fit: contain;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* Make image slides clickable */
+.swiper-slide img {
+  cursor: zoom-in;
+}

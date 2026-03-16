@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UGMT | Login</title>
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="{% static '/bootstrap/bootstrap.min.css' %}" />
+
+    <!-- Dhruv CSS -->
+    <link rel="stylesheet" href="{% static "NavbarStyle.css" %}" />
+    <link rel="stylesheet" href="{% static "loginStyle.css" %}?v=3" />
+    <link rel="stylesheet" href="{% static "bottomBarStyle.css" %}?v=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+  <body>
+    <!-- Top Logo Navbar -->
+    <div id="dsNav" class="d-flex justify-content-between align-items-center">
+      <a href="{% url 'home' %}" class="d-flex align-items-center">
+        <img
+          src="{% static "/images/logonavbar.gif" %}"
+          alt="Logo"
+          width="100"
+          height="100"
+        />
+        <span id="dsNavName">Unique Group of Mankind Trust</span>
+      </a>
+    </div>
+
+    <!-- Form -->
+    <div class="dsForm">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email</label>
+          <input
+            type="text"
+            name="userID"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            required
+          />
+          <div id="emailHelp" class="form-text">
+          </div>
+          {% if EmailInvalid %}
+          <div if="emailHelp" class="form-text" style="color: #FF9966;">
+            {{ EmailInvalid }}
+          </div>
+          {% endif %}
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <div class="eyeBox">
+            <input
+              type="password"
+              name="Password"
+              class="form-control"
+              id="exampleInputPassword1"
+              required
+            />
+            <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+        </div>
+        </div>
+        {% if PasswordInvalid %}
+          <div if="emailHelp" class="form-text" style="color: #FF9966;">
+            {{ PasswordInvalid }}
+          </div>
+        {% endif %}
+        <div class="mb-3 form-check">
+        <a style="text-decoration: none; color: #B1170D; font-size: small;" href="{% url 'forgetPassword' %}">Forget Password</a><br>
+        <span style="font-size: small;" id="btnForget">New User? <a style="text-decoration: none; color: #1D06AA; font-size: small;" href="{% url 'SendOTP' %}" id="btnNew">Register here</a></span>
+        </div>
+        <button type="submit" class="btn btn-primary dsBtnSub">Log in</button>
+      </form>
+    </div>
+    <!-- Footer -->
+    <div class="newArea">
+      <small style="padding-top: 20px;" class="Cre8mark"
+        ><a class="Cre8markLogo" href="https://www.cre8mark.in/"
+          >Developed by <b>CRE</b>8MARK</a
+        >
+      </small>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="{% static "/bootstrap/bootstrap.min.js" %}"></script>
+    <!-- Dhruv Custom JS -->
+    <script src="{% static "script_login.js" %}"></script>
+  </body>
+</html>

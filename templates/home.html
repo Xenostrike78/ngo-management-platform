@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block link %}
+<link rel="stylesheet" href="{% static "HomeStyle.css" %}?v=4" />
+<link rel="stylesheet" href="{% static "GalleryCss/addonGallery.css" %}?v=3" />
+{% endblock %}
+
+{% block memeberListCss%}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+{% endblock %}
+
+{% block content %}
+
+<!-- Image -->
+<div class="imgBox">
+  <img src="{% static 'images/desktopHome.gif' %}"  alt="thumbnail" class="responsive-img" 
+    data-src-small="{% static 'images/mobileHome.gif' %}" data-src-large="{% static 'images/desktopHome.gif' %}"
+  >
+</div>
+
+<!-- Important Notice -->
+<div class="noticeBoard">
+  <h2 class="noticeHeading">सेवा ही सबसे बड़ा धर्म है।</h2>
+  <p class="noticeText" style="font-size: 1.2rem; line-height: 2.5">
+    प्रेरणास्रोत: यह ट्रस्ट देश के हित तथा देशवासियों के सम्मान और सौहार्द
+    के लिए एक कदम है। इसका कार्य विविध प्रकार से देश और देशवासियों को लाभ
+    पहुँचाना है जिसका उद्देश्य केवल सेवा भाव है। यूजीएमटी का कार्य क्षेत्र
+    सम्पूर्ण भारत है, जो कि ट्रस्ट का रोल है।
+  </p>
+</div>
+       
+<br>
+<div class="newUppercard">
+  <p>
+  UGMT की वेबसाइट पर जा कर रजिस्ट्रेशन करना हैं। साथ ही UGMT के Whatsapp Group से जुड़ना हैं 
+  जिसपर सभी सदस्यों को Update रहना होगा | क्योंकि UGMT की समस्त जानकारी Whatsapp Group से मिलती रहेगी |
+  </p>
+  <p>
+  UGMT पर रजिस्ट्रेशन करने के बाद आपको ग्रुप पर नज़र रखनी होगी किसी भी साथी के असमायक मृत्यु होने पर उसके परिवार को सहयोग कर के फार्म भरना अनिवार्ये हैं
+  </p>
+  <p>
+  तथा ट्रस्ट के समस्त कार्यों को पूर्ण करने के लिए जैसे Medical Facility's तथा School, College पर्यावरण तथा वृक्षारोपण और अन्य कार्यों के लिए सहयोग करना अनिवार्य हैं।
+  </p>
+  <br />
+  <div style="text-align: center; margin: auto; font-size: x-large">
+    <b>सहयोग करने पर ही सहयोग मिलेगा</b>
+    <br />
+    <b><span style="font-size: x-large">नियम और अनुशासन सर्वपरि हैं</span></b>
+  </div>
+  <p>
+    <b>UGMT से जुड़ने पर सदस्यता शुल्क मात्र 200/- रु० वार्षिक लिया जाता हैं।</b>
+  </p>
+  <p>
+    <b>UGMT में जो सदस्यता शुल्क लिया जाता हैं वही व्यावस्था शुल्क होता हैं।</b>
+  </p>
+  <br />
+  <p>
+  ट्रस्ट उस फण्ड से वेबसाइट, ऑफिसो, कर्मियों की सैलरी पर व्यय करता हैं। 
+  जिसका हिसाब ट्रस्ट समय समय पर देगा |
+  </p>
+  <p>
+  ये शुल्क online ट्रस्ट के अकाउंट में लिया जाता हैं। 
+  विस्तृत जानकारी के लिए हमारे <a href="{% url "niyamawaliList" %}">term & condition</a> देखे |
+  </p>
+</div>
+
+<!-- Article Box -->
+<div class="card mb-3 dsarticle">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img
+      src="{% static "/images/project_team_lc5a.png" %}"
+      class="img-fluid rounded-start"
+      alt="Arcticle"
+      />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">About us</h5>
+          <p class="card-text" style="font-size: 1.1rem; line-height: 2.5">
+            आइये जानते हैं UGMT के बारे में जिससे प्राइवेट कर्मचारी चाहे वह शिक्षक हो या संविदा कर्मी हो या एक सामान्य व्यक्ति हो UGMT से जुड़ने के लिए इन सभी का रिकॉर्ड सही होना आवश्यक हैं। 
+            हर वह व्यक्ति जो UGMT का सदस्य बनना चाहता हैं उसका कोई अपराधिक रिकॉर्ड तथा अपराधिक विचारो वाली छवि न रखता हो तथा हर समय दुसरो की भलाई के लिए खुदको समर्पित करने का विचार रखता हो 
+            ऐसे सज्जन व्यक्ति ही UGMT से जुड़ सकते हैं |
+            <br>
+            ये ट्रस्ट ऐसे व्यक्तियो की जो ट्रस्ट से जुड़े हैं की आसमयिक मृत्यु होने पर उनके परिवार के नॉमिनी को आर्थिक सहायता देने हेतु सदस्यो द्वारा ट्रस्ट से जुड़े
+            सदस्यों के सहयोग से सहायता प्रदान करता हैं। इसी क्रम में जो ट्रस्ट का लक्ष्य हैं जैसे Medical Facility's तथा School, College पर्यावरण तथा वृक्षारोपण और अन्य कार्यों के लिए सदस्यों द्वारा 
+            सहयोग हेतु बनाया गया हैं।
+          </p>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+
+<!-- notice Section -->
+ 
+<div class="newsSection">
+  <h2 class="newHead" style="width: 100%">Notice Board</h2>
+  <br />
+  <h4 style="color: red">सहयोग हमारा जो बदल दे कल आपका</h4>
+  <br />
+  <p style="font-size: 1.2rem; line-height: 2.5">
+    UGMT के सभी सदस्यो की सुविधा के लिए हेल्पलाइन न० 91 XXX XXX XXXX दिया गया हैं। 
+    किसी भी समस्या के समाधान हेतु लेकिन पहले हर समस्या के लिये जिला टीम से संपर्क करना होगा | 
+    आवश्यकता पड़ने पर सुबह 10 बजे से शाम 5 बजे तक इस नंबर पर कॉल कर सकते हैं 91 XXX XXX XXXX
+  </p>
+  <p style="font-size: 1.2rem; line-height: 2.5">
+    <b>UGMT से कौन जुड़ सकता है?</b><br>
+    UGMT से हर वो सदस्य जुड़ सकता हैं जिसका कोई आपराधिक रिकॉर्ड न हो और न ही वो किसी राजनैतिक पार्टी से जुड़ा हो ऐसे सदस्य ही UGMT से जुड़ सकते हैं।
+  </p>
+  <h4><a href="{% url 'AllNotices' %}" type="_blank">View all notices</a></h4>
+</div>
+
+{% if latest_media %}
+  <br><br>
+  <!-- Gallery Section -->
+  <section class="gallery8-section">  
+    <div class="gallery8-grid">  
+      {% for media in latest_media %}
+        {% if media.media_type == 'image' %}
+          <img src="{{ media.media_file.url }}" alt="Gallery {{forloop.counter}}">
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="gallery8-overlay">
+      <button class="gallery8-text" onclick="window.location='/view-gallery'">View Gallery</button>
+    </div>
+  </section>
+{% endif %}
+<br><br>
+
+<!-- Bank account info -->
+<div class="dsBankInfo">
+  <div class="card border-dark mb-3 dsBankCard">
+      <div class="card-header" style="font-weight: 500;">Bank Information</div>
+      <div class="card-body">
+          <p style="font-weight: bold; color: #444; text-align: center;">
+              आपका योगदान, उनकी आशा: हर दान मायने रखता है।
+          </p><br>
+          <p class="card-text">
+              <b>Account Name:</b> UNIQUE GROUP OF MANKIND TRUST<br />
+              <b>Account Number:</b> 0000XXXXXXXXXXXX<br />
+              <b>Bank:</b> STATE BANK OF INDIA<br />
+              <b>Branch:</b> Main Branch, INDIA<br />
+              <b>IFS Code:</b> SBIN000XXXXX<br />
+          </p>
+          <a href="">
+          <button type="button" class="btn btn-primary">Donate Now</button>
+          </a>
+          <br>
+          <br>
+          <p style="font-weight: bold; color: #444; text-align: center;">
+              देना केवल दान देने के बारे में नहीं है, यह कुछ बदलाव लाने के बारे में है
+          </p>
+      </div>
+  </div>
+</div>
+
+<!-- Awashya Suchna Section -->
+ 
+<div class="newsSection">
+  <br>
+  <h2 class="newHead" style="width: 100%">आवश्यक सुचना</h2>
+  <br>
+  <br>
+  <p style="font-size: 1.2rem; line-height: 2.5">
+    केवल ग्रुप से जुड़ने या केवल रजिस्ट्रेशन करने से कोई भी सदस्य वैधानिक सदस्य नहीं माना जायगा | <br>
+    Term & Conditions के अंतर्गत सहयोग करना अनिवार्य होगा | सहयोग कर के अपनी प्रोफाइल पर रसीद अपलोड करना अनिवार्य होगा ।
+  </p>
+  {% if not Notice or not Alert %}
+  <h4>Latest News</h4>
+  {% endif %}
+  {% if Notice %}
+  <li><a href="{% url 'AllNotices' %}" type="_blank"><b> स्हयोग</b></a></li>
+  {% endif  %} 
+  {% if Alert %}
+  <li><a href="{% url 'AllAlert' %}" type="_blank"><b>अलर्ट</b></a></li>
+  {% else %}
+  <p style="font-size: 1.2rem; line-height: 2.5">
+    (इस समय कोई भी सहयोग प्रक्रिया नहीं चल रही है) <br />
+  </p>
+  {% endif %}
+</div>
+
+
+<br /><br />
+
+<!-- UGMT ka lakshay -->
+<div class="newsSection">
+  <h2 class="newHead" style="width: 100%">UGMT का लक्ष्य</h2>
+  <br />
+  <br />
+  <p style="font-size: 1.5rem">
+    भारत वर्ष में ट्रस्ट की टीमें कार्य करेंगी। <br />
+    जैसे Medical Facility's तथा School, College पर्यावरण अथवा वृक्षारोपण और
+    अन्य कार्यों पर काम करेंगी|<br />
+    <b>हम ईश्वर से अपने इन लक्ष्यों को पूर्ण करने की कामना करते हैं।</b>
+  </p>
+  <br />
+  <h2 style="text-decoration: none; color: rgb(12, 34, 44);">UGMT Help Line no. +91 XXX XXX XXXX</h2>
+  {% if not request.user.is_authenticated %}
+  <br>
+  <h2><a href="{% url 'SendOTP' %}" class="registration-link">Registration Form Link</a></h2>
+  {% endif %}
+</div>
+
+<!-- Member list -->
+<h1 class="MemHead container">Member List</h1>
+<br>
+<br>
+  <div class="dsBody">
+    <div class="container swiper-container">
+      <div class="swiper-wrapper">
+        {% for userData in usersDatass%}
+          <div class="card-list swiper-slide">
+            <div class="card-item">
+              <img src="{{ userData.profilePic.url }}" alt="User Image" class="user-image" style="object-fit: cover;">              
+              <h2 class="user-name">{{ userData.name }}</h2>
+              <p class="user-profession">{{ userData.designation }}</p>
+            </div>
+          </div>
+          {% endfor %}
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </div>
+<br />
+
+<!-- Social Media Options -->
+<h1 class="MemHead container">Connect Us</h1>
+<br /><br />
+<div class="dsSocial container" style="width: 50%">
+  <div class="card dsSocialCard"  >
+    <img src="{% static "images/facebook.jpg" %}" class="card-img-top" alt="..." />
+    <div class="card-body dsFbBg">
+      <p class="card-text dsText">Facebook</p>
+    </div>
+  </div>
+  <div class="card dsSocialCard"  onclick="window.open('https://youtube.com/@ugmtrust?si=xaQKP1Tx8YMN0bbH', '_blank')">
+    <img src="{% static "images/youtube.png" %}" class="card-img-top" alt="..." />
+    <div class="card-body dsYtBg">
+      <p class="card-text dsText">YouTube</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block customCss%} 
+<!-- Dhruv Custom JS -->
+<script src="{% static "script_home.js" %}?v=7"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+{% endblock %}

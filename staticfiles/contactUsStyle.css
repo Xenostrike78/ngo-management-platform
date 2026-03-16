@@ -1,0 +1,83 @@
+.dsNav {
+    border-bottom: 2px solid #230823;
+    padding: 0%;
+  }
+
+  .dsFrame {
+    margin: auto;
+    width: 80%;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  .dsFrame h2 {
+    margin-top: 4%;
+    font-size: xxx-large;
+  }
+
+  .contactform {
+    width: 78%;
+    margin: auto;
+    margin-top: 4%;
+    animation: slideIn 1s ease-in-out;
+  }
+
+  .contactform .form-control {
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .contactform .form-control:focus {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .contactform button {
+    background-color: #230823;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: white;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+
+  .contactform button:hover {
+    background-color: #350835;
+    transform: scale(1.1);
+  }
+
+
+  /* Remove increment and decrement button from input */
+  /* For Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+
+/* For Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }

@@ -1,0 +1,252 @@
+{% extends 'userPanel/userBase.html' %}
+{% load static %}
+{% block title %}Profile{% endblock %}
+{% block tabCss %}
+<link rel="stylesheet" href="{% static "profilestyle.css" %}?v=7" />
+<link rel="stylesheet" href="{% static "print.css" %}" media="print" />
+{% endblock %}
+{% block content %}
+<br>
+<br>
+<!-- Profile Page -->
+<div class="container dsBox">
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4 text-center">
+                <!-- Profile Picture Upload -->
+                <form method="POST" enctype="multipart/form-data" class="p-3 bg-light rounded shadow-sm" style="max-width: 400px; margin: auto;">
+                    {% csrf_token %}
+                    <a href="{{ userData.profilePic.url }}" target="_blank">
+                        <img id="profile-picture-preview"
+                            src="{{ userData.profilePic.url }}"
+                            class="img-fluid rounded-start dsProfile" alt="Profile Picture"
+                        />
+                    </a>
+                    <br/>
+                    <br/>
+
+                    <div class="mb-3">
+                        <label for="profile-picture" class="form-label">Upload Profile Picture</label>
+                        <input type="file" name="profilePicture" class="form-control" required id="profile-picture" accept=".jpg, .jpeg, .png">
+                        <div id="warningMessage" class="warning" style="color: red; font-size: 0.875rem; margin-top: 0.5rem"></div>
+                    </div>
+                    <button class="btn btn-primary w-100" type="submit" name="profile_picture_form">Save</button><br><br>
+                    {% if request.user.is_verified %}
+                        <h4 style="color: green;"> [ Verified Member ]</h4>
+                    {% else %}
+                        <h4 style="color: red;"> [ Unverified Member ]</h4>
+                    {% endif %}
+
+                </form>
+
+                <!-- Aadhaar Picture Upload -->
+                {% if request.user.is_verified == False %}
+                    <form method="POST" enctype="multipart/form-data" class="p-3 bg-light rounded shadow-sm" style="max-width: 400px; margin: auto;">
+                        {% csrf_token %}
+                        <a href="{{ user.aadharPhoto.url }}" target="_blank">
+                            Click to view Aadhar Card
+                        </a>
+                        <br/>
+                        <br/>
+
+                        <div class="mb-3">
+                            <label for="aadhaar-picture" class="form-label">Upload Aadhaar Card</label>
+                            <input type="file" name="aadhaarPicture" class="form-control" required id="aadhaar-picture" accept=".pdf, .jpg">
+                            <div id="aadhaar-warningMessage" class="warning" style="color: red; font-size: 0.875rem; margin-top: 0.5rem"></div>
+                        </div>
+                        <button class="btn btn-primary w-100" type="submit" name="aadhaar_picture_form">Save Aadhaar Picture</button>
+                    </form>
+                {% endif %}
+            </div>
+
+
+            <div class="col-md-8">
+                <div class="card-body print-flex">
+                    <div>
+                    <div class="YoDsprofile">
+                        <span class="profile-name">{{ userData.name }}</span>
+                        {% if request.user.is_superuser %}
+                            <span class="verified-badge">&#10004;</span>
+                        {% endif %}
+                    </div>
+                    <br>
+                    <p class="card-text" id="user-ID-UGMT"><b>UGMT Member ID: </b><span id="member-id"></span></p>
+                    <script>
+                        const memberId = {{ userData.id }}; 
+                        const formattedId = "UGMT" + String(memberId).padStart(3, '0');
+                        document.getElementById("member-id").textContent = formattedId;
+                    </script>
+                    <p class="card-text"><b>Phone Number: </b>+91 {{ userData.mobile }}</p>
+                    {% if userData.is_superuser %}
+                        <p class="card-text"><b>Designation: </b>{{ userData.designation }}</p>
+                    {% endif %}
+                    <p class="card-text"><b>Email: </b>{{ userData.email }}</p>
+                    <p class="card-text"><b>State: </b>{{ userData.state }}</p>
+                    <p class="card-text"><b>District: </b>{{ userData.district }}</p>
+                    <p class="card-text"><b>Near By: </b>{{ userData.near_by }}</p>
+                    <p class="card-text"><b>Zip Code: </b>{{ userData.zip_code }}</p>
+                    <p class="card-text"><b>Date Of Birth: </b>{{ userData.dob }}</p>
+                    <p class="card-text"><b>Blood Group: </b>{{ userData.blood_group }}</p>
+                    <p class="card-text"><b>Aadhaar Number: </b>{{ userData.aadhar }}</p>
+                    <br>
+                    </div>
+
+                    <div>
+                    <!-- MEMBERSHIP STATUS -->
+                    <span class="profile-name">Membership Details</span>
+                    <p class="card-text">
+                    <b>Register Date: </b>{{ userData.registerDate }}
+                    </p>
+                    <p class="card-text">
+                    <b>Membership Renewal Date: </b>{{ userData.expiring_Date }}
+                    </p>
+                    <br />
+                    
+                    <!--N O M I N E E - 1   D E T A I L -->
+                    <span class="profile-name">Nominee Detail</span>
+                    <p class="card-text"><b>Name: </b>{{ userData.nominee1_name }}</p>
+                    <p class="card-text"><b>Phone Number: </b>{{ userData.nominee1_mobile }}</p>
+                    <p class="card-text"><b>Relation: </b>{{ userData.nominee1_relation }}</p>
+                    <br>
+                </div>
+                    <button class="btn btn-primary" id="invite-button">Invite to UGMT</button>
+                    <br>
+                    <br>
+                    <button class="btn btn-info" onclick="window.print()">Print 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9V2h12v7"/>
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                            <path d="M6 14h12v8H6z"/>
+                            <circle cx="18" cy="13" r="1"/>
+                        </svg>
+                    </button>
+                    <script>
+                        document.getElementById("invite-button").addEventListener("click", function() {
+                            const referID = {{ userData.id }}; 
+                            const formattedIdRE = "UGMT" + String(referID).padStart(3, '0');
+                            const message = `Join UGMT, a trusted NGO making a positive impact in the community! Be a part of meaningful change by supporting our causes. Use my referral ID *${formattedIdRE}* to join: UGMT. Together, we can make a difference and uplift lives. \n Visit: https://ugmt.org`;
+                            const whatsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+                            window.open(whatsappURL, '_blank');
+                        });
+                    </script>
+                    {% if userData.refer_id != 'Refer id' %}
+                        <br>
+                        <h4>Referral Information</h4>
+                        <p class="card-text"><b>Name: </b>{{ userData.refer_name }}</p>
+                        <p class="card-text"><b>Mobile: </b>{{ userData.refer_mobile }}</p>
+                        <p class="card-text" id="user-ID-UGMT-2"><b>Referral ID: </b><span id="member-id-refer"></span></p>
+                        <script>
+                            const referID = {{ userData.refer_id }}; 
+                            const formattedIdRE = "UGMT" + String(referID).padStart(3, '0');
+                            document.getElementById("member-id-refer").textContent = formattedIdRE;
+                          </script>
+                    {% endif %}
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center dsstatus">
+            <div class="card-header">Membership Status</div>
+            <div class="card-body">
+                <h5 class="card-title">Current status</h5>
+                <p class="card-text">
+                    {% if not expire%}
+                    <span class="badge text-bg-success">Active</span><br>
+                    {% else %}
+                    <span class="badge text-bg-danger">Expired</span><br>
+                    {% endif %}
+                </p>
+                <p class="card-text"><b>Joined Date: </b>{{ userData.registerDate }}</p>
+                {% if expire%}
+                <a href="{% url 'renew_token' %}" class="btn btn-primary">Renew your membership</a><br>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Print Portion -->
+ <style>
+    .print-Portion{
+        display: none;
+    }
+    @media print{
+        .print-Portion{
+        display: block;
+        }
+    }
+ </style>
+<div class="print-Portion">
+    <div class="heading">
+      <div class="logo"><img src="{% static 'images/TabLogo.png' %}" alt="Logo" /></div>
+      Unique Group of Mankind Trust
+      <div class="conatct-info">
+        <!-- <div class="mobile"></div> -->
+        <div class="address">+91 XXX XXX XXXX  |  Rehmat Nagar, Karula, Moradabad, U.P</div>
+      </div>
+    </div>
+  
+    <div class="personal-info">
+      <div class="user-image" style="text-align: center;">
+        <img
+          src="{{ userData.profilePic.url }}"
+          class="Profile-picture-id"
+          alt="Profile Picture"
+        />
+        <br />
+        <span style="font-size: 0.6rem;">UGMT{{userData.id|stringformat:"03d"}}</span>
+      </div>
+      <div class="user-info">
+        Name: <span class="ds-name">{{userData.name}}</span>
+        <br />
+        Date of Birth: {{userData.dob}}
+        <br />
+        Phone Number: +91 {{ userData.mobile }}
+        <br />
+        <span class="ds-address">Address: {{userData.address}} </span>
+        District: {{userData.district}} 
+        <br />
+        State: {{userData.state}} 
+      </div>
+    </div>
+  </div>
+  
+{% endblock %}
+
+{% block limitJS %}
+<script>
+    document.getElementById("profile-picture").addEventListener("change", function () {
+          const fileInput = this;
+          const warningMessage = document.getElementById("warningMessage");
+          const file = fileInput.files[0];
+          const maxSize = 300 * 1024; // 300KB in bytes
+
+          if (file) {
+            if (file.size > maxSize) {
+              warningMessage.textContent =
+                "File size exceeds 300KB. Please upload a smaller file.";
+              fileInput.value = ""; 
+            } else {
+              warningMessage.textContent = ""; 
+            }
+          }
+        });
+    document.getElementById("aadhaar-picture").addEventListener("change", function () {
+          const fileInput = this;
+          const warningMessage = document.getElementById("aadhaar-warningMessage");
+          const file = fileInput.files[0];
+          const maxSize = 500 * 1024; // 500KB in bytes
+
+          if (file) {
+            if (file.size > maxSize) {
+              warningMessage.textContent =
+                "File size exceeds 500KB. Please upload a smaller file.";
+              fileInput.value = ""; 
+            } else {
+              warningMessage.textContent = ""; 
+            }
+          }
+        });
+</script>
+{% endblock %}

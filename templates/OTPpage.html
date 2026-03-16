@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UGMT | {{ title }}</title>
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="{% static "/bootstrap/bootstrap.min.css" %}" />
+
+    <!-- Dhruv CSS -->
+    <link rel="stylesheet" href="{% static "NavbarStyle.css" %}" />
+    <link rel="stylesheet" href="{% static "loginStyle.css" %}" />
+    <link rel="stylesheet" href="{% static "forgetPasswordstyle.css" %}" />
+  </head>
+  <body>
+    <!-- Top Logo Navbar -->
+    <div id="dsNav" class="d-flex justify-content-between align-items-center">
+      <a href="{% url 'home' %}" class="d-flex align-items-center">
+        <img
+          src="{% static "/images/logonavbar.gif" %}"
+          alt="Bootstrap"
+          width="100"
+          height="100"
+        />
+        <span id="dsNavName">Unique Group of Mankind Trust</span>
+      </a>
+    </div>
+
+    <!-- Form -->
+    <div class="dsForm mt-5">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="otp" class="form-label">OTP sent</label>
+          <input
+            required
+            type="text"
+            class="form-control"
+            id="otp"
+            aria-describedby="phoneHelp"
+            maxlength="4"
+            pattern="\d{4}"
+            title="Please enter exactly 4 digits"
+            name="otpVerify"
+          />
+          <div id="otpHelp" class="form-text">
+            Enter the 4 digit OTP
+          </div>
+          {% if error %}
+            <div style="color: #ea748e;" id="otpError" class="form-text">
+              Wrong OTP
+            </div>
+          {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="{% static "/bootstrap/bootstrap.min.js" %}"></script>
+    <!-- Dhruv Custom JS -->
+    <script src="{% static "OTPpage.js" %}"></script>
+  </body>
+</html>

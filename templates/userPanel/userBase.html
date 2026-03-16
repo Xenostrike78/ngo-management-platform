@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UGMT | {% block title %}{% endblock %}</title>
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="{% static "/bootstrap/bootstrap.min.css" %}" />
+    <link rel="icon" href="{% static "/images/TabLogo.png" %}?v=2" type="image/x-icon">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static "UserPanelNavbarStyle.css" %}?v=2" />
+    <link rel="stylesheet" href="{% static "bottomBarStyle.css" %}" />
+    <link rel="stylesheet" href="{% static "toogle.css" %}?v=2" />
+    {% block tabCss%} {% endblock %}
+
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />  
+    <style>
+        .dsNavColor:hover svg {
+        fill: #f5e6f4;
+        }
+
+        .profileActive {
+        background-color: #ffffff;
+        color: #833958;
+        box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.3),
+            inset 0px 0px 5px rgba(255, 255, 255, 0.3);
+        }
+        .dsNavColor:hover {
+        background-color: #833958 !important;
+        color: #f5e6f4 !important;
+        }
+
+        .dsNavColor:active {
+        background-color: #833958 !important;
+        color: #f5e6f4 !important;
+        }
+    </style> 
+</head>
+<body>
+
+    <!-- Top Logo Navbar -->
+    <div id="dsNav" class="d-flex justify-content-between align-items-center" style="width: 98%; overflow-x: hidden;">
+        <a href="{% url 'home' %}" class="d-flex align-items-center">
+            <img
+              src="{% static "/images/logonavbar.gif" %}?v=3"
+              alt="Bootstrap"
+              width="100"
+              height="100"
+            />
+            <span id="dsNavName">Unique Group of Mankind Trust</span>
+        </a>
+        <div class="d-flex gap-2">
+            <a href="{% url 'profile' %}">
+                <button class="btn btn-primary dsNavColor dsNavRM {% if request.path == '/login/profile'%} profileActive {% endif %}" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#833958" viewBox="0 0 24 24">
+                    <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 
+                2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 
+                1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+                    </svg>
+                    Profile
+                </button>
+            </a>
+            <a href="{% url 'logout' %}">
+                <button class="btn btn-primary dsNavColor dsNavRM" type="button">
+                    Log Out
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom bg-white dsNav">
+        <div class="container-fluid">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarTogglerDemo03"
+              aria-controls="navbarTogglerDemo03"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/login/searchMembers'%} active {% endif %}" {% if request.path == '/login/searchMembers'%} aria-current="page" {% endif%} href="{% url 'searchMembers' %}">Member list</a>
+                    </li>
+                    {% if request.user.is_superuser %}
+                    <!-- <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/login/checkDonation'%} active {% endif %}" {% if request.path == '/login/checkDonation'%} aria-current="page" {% endif%} href="{% url 'CheckDonation' %}">Check Donation</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/login/gallery-management'%} active {% endif %}" {% if request.path == '/login/gallery-management'%} aria-current="page" {% endif%} href="{% url 'GalleryManagement' %}">Gallery Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/login/genNotice'%} active {% endif %}" {% if request.path == '/login/genNotice'%} aria-current="page" {% endif%} href="{% url 'genNotice' %}">Manage Notice/Alert</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/login/viewNotice'%} active {% endif %}" {% if request.path == '/login/viewNotice'%} aria-current="page" {% endif%} href="{% url 'viewNotice' %}">Notice & Alert</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/login/viewAlert'%} active {% endif %}" {% if request.path == '/login/viewAlert'%} aria-current="page" {% endif%} href="{% url 'viewAlert' %}">Alert</a>
+                    </li> -->
+                    
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/login/donatedTo'%} active {% endif %}" {% if request.path == '/login/donatedTo'%} aria-current="page" {% endif%} href="{% url 'donatedTo' %}">Donated To</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/login/profile'%} active {% endif %}" {% if request.path == '/login/profile'%} aria-current="page" {% endif%}  href="{% url 'profile' %}">Profile</a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+   
+    
+    {% block content%} {% endblock%}
+
+    <!-- Bottom Bar -->
+    <br>
+    <br>
+   <div class="BottomBar">
+     <div class="dsHeadLink">
+     <h5>Quick Links</h5>
+     <a target="_blank" href="{% url 'memberList' %}">Member List</a><br />
+     <a target="_blank" href="{% url 'contactUs' %}">Contact Us</a><br />
+     <a target="_blank" href="{% url 'niyamawaliList' %}">Terms & Conditions</a><br />
+     </div>
+     <div class="dsHeadLink">
+     <h5>Useful Links</h5>
+         <a target="_blank" href="{% url 'home' %}">Home</a><br />
+         <a target="_blank" href="{% url 'about' %}">About Us</a><br />
+     </div>
+     <div class="dsHeadLink">
+         <h5>Contact Information</h5>
+         <a href="#"><i class="fas fa-envelope"></i> uniquegroupofmankindtrust@gmail.com</a><br />
+         <a href="#"><i class="fas fa-phone"></i>+91 94118 85433</a><br />
+     </div>
+   </div>
+   <!-- CRE8MARK -->
+   <div class="newArea">
+     <small class="Cre8mark"><a target="_blank" class="Cre8markLogo" href="https://www.cre8mark.in/">Developed by <b>CRE</b>8MARK</a></small>
+   </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="{% static "/bootstrap/bootstrap.min.js" %}"></script>
+    {% block limitJS%} {% endblock %}
+</body>
+</html>
+

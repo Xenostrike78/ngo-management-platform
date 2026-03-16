@@ -1,0 +1,242 @@
+#dsNav a {
+  text-decoration: none;
+  color: inherit; /* Ensure the color remains the same */
+}
+
+#dsNav {
+  margin-top: 0.75%;
+  margin-left: 0.75%;
+  font-size: xxx-large;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 1.5%);
+  box-sizing: border-box;
+}
+
+/* NEW ADDITION */
+.dsNav {
+  border-bottom: 2px solid #230823;
+  padding: 0%;
+  padding-bottom: 0.2%;
+  margin-bottom: 2%;
+}
+
+.dsNavColor {
+  width: 100px;
+  background-color: #f5e6f4;
+  color: #833958;
+  border: #833958;
+  border-radius: 15px;
+  cursor: pointer;
+  outline: none;
+}
+
+.dsNavColor:hover {
+  background-color: #833958;
+}
+
+#dsNavName {
+  margin-left: 2%;
+  color: #1d3d51;
+  white-space: nowrap;
+}
+
+#dsNav a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar-custom {
+  background-color: white; /* Set background color to white */
+  margin-bottom: 0;
+}
+
+.nav-item a {
+  color: #230823;
+}
+
+.active {
+  border-bottom: 3px solid #230823;
+  margin-bottom: 0;
+}
+
+.navbar-custom .navbar-nav {
+  margin: auto; /* Center-align navbar items */
+}
+
+.navbar-custom .nav-item {
+  margin-right: 100px; /* Increase space between navbar items */
+}
+
+.navbar-custom .navbar-collapse {
+  justify-content: center; /* Center-align items horizontally */
+}
+
+.navbar-custom .form-inline {
+  display: none; /* Hide the search form */
+}
+
+/* Whatsapp Logo */
+.whatsappLogo {
+  position: fixed;
+  bottom: 20px; /* Adjust as needed */
+  right: 20px;  /* Adjust as needed */
+  z-index: 1000;
+}
+
+.whatsappLogo a img {
+  width: 70px;  /* Adjust size as needed */
+  height: 70px; /* Adjust size as needed */
+  transition: transform 0.3s;
+}
+
+.whatsappLogo a img:hover {
+  transform: scale(1.1);
+}
+
+/* P H O N E   L O G O */
+.telephoneLogo {
+  position: fixed;
+  bottom: 20px;
+  left: 20px; /* Aligns the logo to the left side */
+  z-index: 1000;
+  display: none; /* Initially hide the logo */
+}
+
+.telephoneLogo a img {
+  width: 50px;
+  height: 50px;
+  transition: transform 0.3s;
+}
+
+.telephoneLogo a img:hover {
+  transform: scale(1.1);
+}
+
+/* Show the logo only on mobile devices */
+@media only screen and (max-width: 768px) {
+  .telephoneLogo {
+    display: block;
+  }
+}
+
+/* R E S P O N S I V E N E S S */
+/* Media Queries for smaller screens */
+/* Portrait */
+@media (max-width: 575.98px) {
+  #dsNav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: larger;
+    width: 95%;
+    margin: auto;
+  }
+
+  .dsLogoImg {
+    width: 35px;
+    height: 35px;
+  }
+
+  .dsNavColor {
+    width: auto;
+    margin: 5px 0;
+  }
+
+  .dsBankInfo {
+    width: 100%;
+  }
+
+  .navbar-custom .nav-item {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .navbar-custom .navbar-collapse {
+    flex-direction: column;
+  }
+}
+/* Landscape */
+@media (max-width: 950px) and (max-height: 450px) and (orientation: landscape) {
+  #dsNav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: larger;
+    width: 100%;
+  }
+
+  .dsLogoImg {
+    width: 35px;
+    height: 35px;
+  }
+
+  .dsNavColor {
+    width: auto;
+    margin: 5px 0;
+  }
+
+  .dsBankInfo {
+    width: 100%;
+  }
+
+  .navbar-custom .nav-item {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .navbar-custom .navbar-collapse {
+    flex-direction: column;
+  }
+}
+
+/* iPad Mini Portrait */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  #dsNav {
+    font-size: xx-large;
+    width: 100%;
+    margin-bottom: 1%;
+  }
+
+  .dsLogoImg {
+    width: 45px;
+    height: 45px;
+  }
+
+  /* Class ass krni h */
+  .dsNavRM {
+    margin-right: 10%;
+  }
+}
+
+/* iPad Mini Landscape */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  #dsNav {
+    font-size: x-large;
+    width: 100%;
+    margin-bottom: 1%;
+  }
+
+  .dsLogoImg {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .nav-item a{
+    font-size: 0.6rem;
+  }
+  .dsNavRM {
+    margin-right: 10%;
+  }
+}
+
+/* iPad Pro Portrait */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait) {
+  .nav-item a{
+    font-size: 0.6rem;
+  }
+  .dsNavRM {
+    margin-right: 10%;
+  }
+}

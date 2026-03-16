@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{% static "/images/TabLogo.png" %}?v=2" type="image/x-icon">
+    <title>Check Transaction IDs</title>
+    <link rel="stylesheet" href="{% static "CheckStatementStyle.css" %}?v=3" />
+  </head>
+  <body>
+    <a
+      href="{% url 'searchMembers' %}"
+      style="
+        text-decoration: none;
+        color: black;
+        font-size: xx-large;
+        display: inline-block;
+      ">
+      <div class="close-button" style="display: inline-block; width: auto">
+        &times;
+      </div>
+    </a>
+    <h1>Verify Transactions</h1>
+    <div class="dsCard container">
+      <div class="dsCardBody">
+        <form method="post">
+          {% csrf_token %}
+          <div class="searchBox">
+            <input required name="transactionIDs"type="text" placeholder="Upload Transaction Id" />
+          </div>
+          <div class="dsButton">
+            <button type="submit">Verify</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    {% if Error %}
+      <div
+        id="error-message"
+        class="form-text"
+        style="color: #ff9966"
+      >
+        <b>{{ Error }}</b>
+      </div>
+    {% endif %}
+    <br />
+    <div class="table-responsive">
+      <table id="transaction-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Transaction Id</th>
+            <th>Mobile Number</th>
+            <th>Date</th>
+            <th>Matched</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if transactionIDs %}
+            {% for ids in transactionIDs %}
+              {% if ids.is_matched%}
+                <tr class="dhruv-row">
+                  <td>{{ ids.name }}</td>
+                  <td>{{ ids.transaction_id }}</td>
+                  <td>{{ ids.mobile }}</td>
+                  <td>{{ ids.date }}</td>
+                  <td>{{ ids.is_matched }}</td>
+                </tr>
+              {% else %}
+                <tr>
+                  <td>{{ ids.name }}</td>
+                  <td>{{ ids.transaction_id }}</td>
+                  <td>{{ ids.mobile }}</td>
+                  <td>{{ ids.date }}</td>
+                  <td>{{ ids.is_matched }}</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            <tr>
+              <td colspan="5" class="text-center">No Transaction-id</td>
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+            const table = document.getElementById('transaction-table');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+
+            // Separate rows into dhruvRows and otherRows
+            const dhruvRows = rows.filter(row => row.classList.contains('dhruv-row'));
+            const otherRows = rows.filter(row => !row.classList.contains('dhruv-row'));
+
+            // Clear the table body
+            tbody.innerHTML = '';
+
+            // Append dhruvRows first, then otherRows
+            dhruvRows.forEach(row => tbody.appendChild(row));
+            otherRows.forEach(row => tbody.appendChild(row));
+        });
+    </script>
+  </body>
+</html>

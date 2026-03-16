@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="{% static "MemberShip_Style.css" %}">
+    <link rel="stylesheet" href="{% static '/bootstrap/bootstrap.min.css' %}" />
+    <link rel="icon" href="{% static "/images/TabLogo.png" %}?v=2" type="image/x-icon">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  </head>
+  <body>    
+    <div class="card" id="card-content">
+    <h1 class="title">Pay Membership Fees</h1>
+    <br />
+    <small class="muted">To Register Successfully pay ₹200</small>
+    <br />
+    <div class="btn_container">
+      <button class="btn dsModi btn-primary" id="rzp-button">Pay</button>
+    </div>
+    <br />
+    <h5>
+      Please wait for the Successful Payment Page after making the payment and
+      wait to be redirected to the Login Page.
+    </h5>
+  </div>
+
+    <script>
+      var options = {
+        key: "{{ razorpay_key }}", // Enter the Key ID generated from the Dashboard
+        amount: "{{ amount }}", // Amount is in currency subunits (paisa)
+        currency: "{{ currency }}",
+        name: "UGMT",
+        description: "Membership Fees",
+        order_id: "{{ order_id }}", // This is a Razorpay order ID
+        image: "{{ image }}",
+        handler: function (response) {
+          document.getElementById("razorpay_payment_id").value =
+            response.razorpay_payment_id;
+          document.getElementById("razorpay_order_id").value =
+            response.razorpay_order_id;
+          document.getElementById("razorpay_signature").value =
+            response.razorpay_signature;
+            
+          document.getElementById("card-content").innerHTML = `
+            <div class="loadingSpiner">
+              <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                  </div>
+                  </div>
+                  <h3>Please wait while we confirm your payment</h3>
+                  <p>This process may take a few moments. Please do not refresh or close the page.</p>
+                  </div>
+                  `;
+                  
+          document.getElementById("payment_form").submit();
+        },
+        prefill: {
+            email: "{{ email }}", // Prefill with user's email
+            contact: "{{ mobile }}", // Prefill with user's mobile number
+        },
+        theme: {
+          color: "#1D9D74",
+        },
+        config: {
+          display: {
+            blocks: {
+              card: {
+                name: "Pay with Card",
+                instruments: [
+                  {
+                    method: "card",
+                  },
+                ],
+              },
+              netbanking: {
+                name: "Net Banking",
+                instruments: [
+                  {
+                    method: "netbanking",
+                  },
+                ],
+              },
+              upi: {
+                name: "Pay via UPI",
+                instruments: [
+                  {
+                    method: "upi",
+                  },
+                ],
+              },
+            },
+            hide: [
+              {
+                method: "wallet", // Hide wallet/payment methods like "Pay Later"
+              },
+              {
+                method: "emi", // Hide EMI payment options
+              },
+              {
+                method: "paylater", // Hide Pay Later options
+              },
+            ],
+            sequence: ["block.upi", "block.card", "block.netbanking"],
+            preferences: {
+              show_default_blocks: false, // Should Checkout show its default blocks?
+            },
+          },
+        },
+      };
+      var rzp1 = new Razorpay(options);
+      document.getElementById("rzp-button").onclick = function (e) {
+        rzp1.open();
+        e.preventDefault();
+      };
+    </script>
+
+    <form
+      id="payment_form"
+      action="{% url 'MembershipPayment'  %}"
+      method="POST"
+    >
+      {% csrf_token %}
+      <input
+        type="hidden"
+        name="razorpay_payment_id"
+        id="razorpay_payment_id"
+      />
+      <input type="hidden" name="razorpay_order_id" id="razorpay_order_id" />
+      <input type="hidden" name="razorpay_signature" id="razorpay_signature" />
+    </form>
+  </body>
+</html>

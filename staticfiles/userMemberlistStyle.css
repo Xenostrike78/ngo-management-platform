@@ -1,0 +1,287 @@
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Applying animation to the list box and table */
+.dsFrame,
+.dsList {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.dsNav {
+  border-bottom: 2px solid #230823;
+  padding: 0%;
+  padding-bottom: 0.2%;
+  margin-bottom: 2%;
+}
+
+.dsFrame {
+  margin: auto;
+  width: 80%;
+}
+
+.dsFrame h2 {
+  margin-top: 4%;
+  font-size: xxx-large;
+}
+
+/* Improved styling for the search bar */
+.dsCard {
+  margin-bottom: 20px;
+}
+
+.dsCardBody {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dsFormControl {
+  border-radius: 20px;
+  border: 1px solid #007bff;
+  padding: 10px 20px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.dsFormControl:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+}
+
+.dsBtn {
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+
+.dsFormSelect {
+  border-radius: 20px;
+  border: 1px solid #007bff;
+  padding: 10px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.dsFormSelect:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+}
+
+.dsMb100 {
+  margin-left: 20px;
+}
+
+/* Responsiveness */
+/* Make the table horizontally scrollable */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* For smoother scrolling on touch devices */
+}
+
+/* Apply the scrollable class to the table container */
+.dsCustomWidth {
+  overflow-x: auto;
+}
+
+/* Button Styling */
+.btn-primary {
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Button Hover Effect */
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+/* Button Alignment */
+.align-right {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .btn-primary {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+.dsNavColor {
+  width: 100px;
+  background-color: #f5e6f4;
+  color: #833958;
+  border: #833958;
+  border-radius: 15px;
+  cursor: pointer;
+  outline: none;
+  font-weight: 400;
+}
+
+.dsNavColor:hover {
+  background-color: #833958;
+  color: #fff;
+}
+
+
+
+form {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.searchBox input {
+  width: 300px;
+  padding: 10px 15px;
+  border: 2px solid #ddd;
+  border-radius: 50px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.searchBox input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+  width: 500px;
+}
+
+.dsButton button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.dsButton button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 0 8px rgba(0, 91, 179, 0.5);
+}
+
+.dsButton select {
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 50px;
+  outline: none;
+  background-color: white;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.dsButton select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* Responsive Styling */
+@media (max-width: 575.98px) {
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .searchBox input {
+    width: 320px;
+  }
+
+  .dsButton {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .dsButton button,
+  .dsButton select {
+    width: 48%;
+  }
+
+  .searchBox input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    width: 350px;
+  }
+}
+
+.dhruvButton {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+/* Hover effect */
+.dhruvButton:hover {
+  background-color: #0056b3; 
+  transform: scale(1.05); 
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dhruvButton {
+    padding: 8px 16px; 
+    font-size: 14px; 
+  }
+}
+
+@media (max-width: 480px) {
+  .dhruvButton {
+    padding: 6px 12px; 
+    font-size: 12px; 
+  }
+}
+.blur-content {
+  filter: blur(5px);
+}
+
+.download-btn {
+  background: linear-gradient(45deg, #ff6b6b, #f06595, #845ef7);
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-size: 16px;
+  border-radius: 99px;
+  transition: background 0.3s ease;
+
+}
+
+.download-btn a {
+  color: white;
+  text-decoration: none;
+}
+
+.download-btn:hover {
+  background: linear-gradient(45deg, #845ef7, #f06595, #ff6b6b);
+}

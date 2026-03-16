@@ -1,0 +1,53 @@
+{% extends "userPanel/userBase.html" %}
+{% block title %}Donated To{% endblock %}
+{% load static %}
+{% block tabCss %}
+<link rel="stylesheet" href="{% static "memberlistStyle.css" %}?v=4" />
+{% endblock %}
+
+{% block content %}
+    <!-- List Box -->
+    <div class="dsFrame">
+      <h2>Donated To</h2>
+    </div>
+    <div class="dsList">
+      <div class="container mt-5">
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Heading</th>
+              <th>Total Amount</th>
+              <th>Amount you paid</th>
+              <th>Charity Alert</th>
+              <th>Date you donate</th>
+              <th>Donation Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if donatedTO %}
+              {% for donated in donatedTO %}
+                <tr>
+                  <td>{{ donated.user.name }}</td>
+                  <td>{{ donated.charity_alert.text_area }}</td>
+                  <td>{{ donated.charity_alert.total_amount }}</td>
+                  <td>{{ donated.charity_alert.amount_per_member }}</td>
+                  <td>{{ donated.charity_alert.date }}</td>
+                  <td>{{ donated.date }}</td>
+                  {% if donated.charity_alert.id in TransID %}
+                    <td>Verified</td>
+                  {% else %}
+                    <td>Not Verified</td>
+                  {% endif %}
+                </tr>
+              {% endfor %}
+            {% else %}
+              <tr>
+                <td colspan="7" class="text-center">You haven't donated yet</td>
+              </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+{% endblock %}

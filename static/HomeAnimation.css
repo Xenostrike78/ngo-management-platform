@@ -1,0 +1,84 @@
+/* Animation keyframes */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* General styling */
+.dsFrame {
+  margin: auto;
+  width: 80%;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.dsFrame h2 {
+  margin-top: 4%;
+  font-size: xxx-large;
+  animation: slideIn 1s ease-out;
+}
+
+.dsTextCen {
+  text-align: center;
+  margin-top: 5%;
+  animation: fadeIn 2s ease-in-out;
+}
+
+/* Card Image Full Animation */
+.dsCardImgFull {
+  margin-top: 5%;
+  animation: slideIn 1s ease-out;
+}
+
+.dsImgCard h5 {
+  font-size: xx-large;
+  margin: 1.75%;
+  margin-bottom: 5%;
+}
+
+.dsImgCard p {
+  text-align: left;
+  animation: fadeIn 2s ease-in-out;
+}
+
+/* Social Media Options Animation */
+.dsSocialCard {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.dsSocialCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(1px);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.dsSocialCard:hover::before, .dsSocialCard:active::before {
+  opacity: 1;
+}
+
+.dsSocialCard:hover, .dsSocialCard:active {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}

@@ -1,0 +1,106 @@
+
+/* errorPageStyle.css */
+
+body {
+    font-family: 'Baloo Bhaijaan', cursive;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    text-align: center;
+}
+
+.UpperHead {
+    font-size: 2.5rem;
+    color: #FF4500;
+    margin-bottom: 1rem;
+    animation: fadeInDown 1s ease-in-out;
+}
+
+.h5Dhruv {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+    animation: fadeInUp 1s ease-in-out;
+}
+
+h5 {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+a {
+    font-size: 1.2rem;
+    color: #FF4500;
+    text-decoration: none;
+    margin-top: 2rem;
+    padding: 0.5rem 1.5rem;
+    border: 2px solid #FF4500;
+    border-radius: 25px;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    animation: fadeInUp 1.5s ease-in-out;
+}
+
+a:hover {
+    background-color: #FF4500;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .UpperHead {
+        font-size: 2rem;
+    }
+
+    .h5Dhruv {
+        font-size: 0.9rem;
+    }
+
+    a {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .UpperHead {
+        font-size: 1.5rem;
+    }
+
+    .h5Dhruv {
+        font-size: 0.8rem;
+    }
+
+    a {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.8rem;
+    }
+}

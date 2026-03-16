@@ -1,0 +1,126 @@
+.dsNav {
+    border-bottom: 2px solid #230823;
+    padding: 0%;
+    padding-bottom: 0.2%;
+    margin-bottom: 2%;
+}
+
+.dsFrame {
+    margin: auto;
+    width: 80%;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.dsFrame h2 {
+    margin-top: 4%;
+    font-size: xxx-large;
+    transform: translateY(-20px);
+    animation: slideIn 1s ease-out forwards;
+}
+
+#noticeForm {
+    width: 80%;
+    margin: auto;
+    margin-top: 4%;
+    transform: scale(0.9);
+    opacity: 0;
+    animation: scaleUp 1s ease-out forwards 0.5s;
+}
+
+#btnSub {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#btnSub:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.dsNavColor {
+    width: 100px;
+    background-color: #f5e6f4;
+    color: #833958;
+    border: #833958;
+    border-radius: 15px;
+    cursor: pointer;
+    outline: none;
+}
+  
+  
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleUp {
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+
+
+.dsNavColor {
+    width: 100px;
+    background-color: #f5e6f4;
+    color: #833958;
+    border: #833958;
+    border-radius: 15px;
+    cursor: pointer;
+    outline: none;
+    font-weight: 400;
+}
+
+.dhruvButton {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer; 
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    text-align: center;
+  }
+
+  /* Hover effect */
+  .dhruvButton:hover {
+    background-color: #0056b3; 
+    transform: scale(1.05); 
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .dhruvButton {
+      padding: 8px 16px; 
+      font-size: 14px; 
+    }
+  }
+
+  @media (max-width: 480px) {
+    .dhruvButton {
+      padding: 6px 12px; 
+      font-size: 12px; 
+    }
+  }

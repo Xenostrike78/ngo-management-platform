@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{% static "/images/TabLogo.png" %}?v=2" type="image/x-icon">
+    <title>Member Verification</title>
+    <link rel="stylesheet" href="{% static "CheckStatementStyle.css" %}?v=4" />
+    <link rel="stylesheet" href="{% static "bootstrap/bootstrap.min.css" %}">
+  </head>
+  <body>
+    <a
+      href="{% url 'searchMembers' %}"
+      style="
+        text-decoration: none;
+        color: black;
+        font-size: xx-large;
+        display: inline-block;
+      ">
+      <div class="close-button" style="display: inline-block; width: auto">
+        &times;
+      </div>
+    </a>
+    <h1>Verify Members</h1>
+    <br />
+    <div class="table-responsive">
+      <table id="transaction-table">
+        <thead>
+          <tr>
+            <th>UGMT ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Aadhar</th>
+            <th>See info</th>
+            <th>Verify it</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if unverifyData %}
+            {% for member in unverifyData %}
+                <tr >
+                  <td class="serial-number">{{ member.id }}</td>
+                  <td>{{ member.name }}</td>
+                  <td>{{ member.email }}</td>
+                  <td>{{ member.aadhar }}</td>
+                  <td><a href={% url "memberInfo" member.id %} target="_blank">Click here</a></td>
+                  <form method="POST">
+                    {% csrf_token %}
+                    <input hidden name="aadharNumber"type="text" value="{{ member.aadhar }}"/>
+                  <td><button class="btn btn-success" type="submit">Verify</button></td>
+                  </form>
+                </tr>
+            {% endfor %}
+          {% else %}
+            <tr>
+              <td colspan="5" class="text-center">All members are verified</td>
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+      <script>
+        function formatSerialNumber(number) {
+            return 'UGMT'+number.toString().padStart(3,'0');
+        }
+    
+        document.addEventListener("DOMContentLoaded", function() {
+            const serialNumberCells = document.querySelectorAll('.serial-number');
+            serialNumberCells.forEach(cell => {
+                const originalNumber = parseInt(cell.textContent, 10);
+                cell.textContent = formatSerialNumber(originalNumber);
+            });
+        });
+    </script>
+    </div>
+  </body>
+</html>

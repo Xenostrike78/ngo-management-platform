@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.BottomBar {
+  display: flex;
+  justify-content: center;
+  background-color: #0c030c;
+  color: white;
+  padding: 5%;
+  margin-bottom: 0;
+  transition: background-color 0.3s ease;
+}
+
+
+.dsHeadLink {
+  margin-left: 5%;
+  margin-right: 5%;
+  transition: transform 0.3s ease;
+}
+
+.dsHeadLink:hover {
+  transform: scale(1.05); /* Slightly enlarges on hover */
+}
+
+.dsHeadLink a {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.dsHeadLink a:hover {
+  color: #f5a623; /* Change color on hover */
+}
+
+.dsHeadLink h5 {
+  border-bottom: 2px solid white;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  transition: border-color 0.3s ease;
+}
+
+.dsHeadLink h5:hover {
+  border-bottom-color: #f5a623; /* Change border color on hover */
+}
+
+
+.dsHeadLink a i {
+  margin-right: 8px; /* Space between icon and text */
+  transition: color 0.3s ease;
+}
+
+.dsHeadLink a:hover i {
+  color: #f5a623; /* Change icon color on hover */
+}
+
+
+
+.newArea{
+  width: 100%;
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+  background-color: #0c030c;
+  overflow: hidden;
+}
+
+.Cre8mark {  
+  color: white;
+  background-color: #0c030c;
+  text-align: center;
+  padding-bottom: 20px;
+  transition: transform 0.3s ease-in-out;
+  position: relative;
+  display: inline-block;
+  font-family: 'Inter', sans-serif;;
+}
+
+.Cre8markLogo {
+  text-decoration: none;
+  color: white;
+}
+
+.Cre8mark:hover {
+  transform: scale(1.2);
+}
+
+.Cre8mark:hover, .Cre8mark:hover .Cre8markLogo {
+  background: linear-gradient(45deg, #ffa6bb, #ffffff, #d7aeff, #12C2E9, #FF9A8B);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientAnimation 5s infinite;
+  background-size: 300% 300%;
+}
+
+@keyframes gradientAnimation {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}
+
+
+
+/* Media Queries for smaller screens */
+@media (max-width: 575.98px) {
+  .BottomBar {
+      flex-direction: column;
+      text-align: left;
+  }
+}

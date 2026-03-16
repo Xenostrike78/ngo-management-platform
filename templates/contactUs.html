@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block link %}<link rel="stylesheet" href="{% static "contactUsStyle.css" %}"/>{% endblock %}
+
+
+
+{% block content %}
+<!-- Contact us -->
+<div class="dsFrame">
+    <h2>Contact Us</h2>
+
+</div>
+<!-- Form -->
+<div class="contactform">
+  <form method="POST">
+    {% csrf_token %}
+    <!-- Name -->
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Enter your Name</label>
+      <input required type="text" class="form-control" name="Name"  value="{% if userContact %}{{ userContact.name }}{% endif %}"  id="exampleInputEmail1" aria-describedby="emailHelp">
+      <div id="emailHelp" class="form-text"></div>
+    </div>
+    <!-- Subject -->
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Enter Subject</label>
+      <input required type="text" name="Subject" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <div id="emailHelp" class="form-text"></div>
+    </div>
+    <!-- Mobile -->
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Enter Mobile</label>
+      <input required type="number" name="PhoneNumber" value="{% if userContact %}{{ userContact.mobile }}{% endif %}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+        maxlength="12"
+        pattern="\d{10}"
+        oninput="this.value = this.value.slice(0, 12)"
+        >
+      <div id="emailHelp" class="form-text"></div>
+    </div>
+    <!-- Email -->
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Enter your Email</label>
+      <input required type="email" name="email" value="{% if userContact %}{{ userContact.email }}{% endif %}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <div id="emailHelp" class="form-text"></div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Enter Message</label>
+      <textarea required style="resize: none;" name="content" class="form-control" id="message" rows="5" placeholder="Type your message here..."></textarea>
+      <div id="emailHelp" class="form-text"></div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+{% endblock %}

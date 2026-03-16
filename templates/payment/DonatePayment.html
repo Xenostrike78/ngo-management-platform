@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{% static "/images/TabLogo.png" %}?v=2" type="image/x-icon">
+    <title>UGMT | Payment</title>
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="{% static "/bootstrap/bootstrap.min.css" %}" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static "DonatePayment.css" %}" />
+  </head>
+  <body>
+    <a
+      href="{% url 'viewAlert' %}"
+      style="
+        text-decoration: none;
+        color: black;
+        font-size: xx-large;
+        display: inline-block;
+      ">
+      <div class="close-button" style="display: inline-block; width: auto">
+        &times;
+      </div>
+    </a>
+    <div class="container">
+      <br><br>
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Make Payment</h5>
+              <ul style="list-style-type: none; padding: 0">
+                <li><b>Name:</b> {{UserInfo.name}}</li>
+                <li><b>Banking Name:</b> {{CharityInfo.bank_name}}</li>
+                <li><b>UPI Id:</b> {{ CharityInfo.upi_id }}</li>
+              </ul>
+              <form method="POST">
+                {% csrf_token %}
+                <input
+                  required
+                  type="text"
+                  name="transactionID"
+                  placeholder="Enter your UPI transaction Id"
+                  class="form-control mb-2"
+                  minlength="12"
+                  maxlength="22" 
+                />
+                {% if error %}
+                  <div if="aadharHelp" class="form-text" style="color: #FF9966;">
+                    <b>{{ error }}</b>
+                  </div>
+                {% endif %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+              <a href="{% url "downloadQR" request.session.TOKENstatement UserInfo.id CharityInfo.id %}">
+                <button class="btn btn-primary mobile-only">Download the QRcode</button>
+              </a>            
+            </div>
+          </div>
+          <div class="col-md-4">
+            <img
+              src="data:image/png;base64,{{ QRcode }}"
+              class="img-fluid rounded-end"
+              alt="UPI QR"
+            />
+            <p class="card-text text-center mt-2">
+              <small class="text-muted">Make Payment of {{CharityInfo.amount_per_member }}</small>
+            </p>
+          </div>
+          <!-- I N S T R U C T I O N   F O R   M O B I L E -->
+          <div class="card" style="display: block;">
+            <div class="card-header">
+              How to pay
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <ol type="1">
+                    <li>Download the UPI QR code.</li>
+                    <li>Open your UPI app <span><b>(e.g., GPay, Paytm, etc.)</b></span>.</li>
+                    <li>Click on the <b>Upload from gallery</b> option in the QR scanner.</li>
+                    <li>After completing the payment, enter your transaction ID in the input box above and submit it.</li>                
+                </ol>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap 5 JS -->
+    <script src="{% static "/bootstrap/bootstrap.min.js" %}"></script>
+  </body>
+</html>

@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Gallery Post{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'aboutusStyle.css' %}">
+<link rel="stylesheet" href="{% static 'GalleryCss/galleryPost.css' %}?v=2">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+{% endblock %}
+
+{% block content %}
+  <!-- About us -->
+  <div class="dsFrame">
+    <h2>Gallery</h2>
+    <br />
+  </div>
+
+  <!-- Details -->
+  <div class="details">
+    <div class="title">
+      {{post.caption}}
+    </div>
+    <div class="date">{{post.date}}</div>
+  </div>
+
+  <!-- Swiper Container -->
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      {% for media in post.media %}
+        <div class="swiper-slide">
+          {% if media.type == 'image' %}
+            <img src="{{ media.url }}" alt="Image {{ forloop.counter }}">
+          {% elif media.type == 'video' %}
+            <iframe width="100%" height="100%" src="{{ media.url }}"
+              title="Video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      
+      <!-- Swiper navigation buttons -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      
+      <!-- Swiper pagination dots -->
+      <div class="swiper-pagination"></div>
+    </div>
+{% endblock %}
+
+{% block customCss %}
+<!-- Ye div add krna h -->
+  <div class="fullscreen-overlay" id="fullscreenOverlay">
+    <span class="close-btn">&times;</span>
+    <img class="fullscreen-image" id="fullscreenImage" src="" alt="Fullscreen Image">
+  </div>
+
+  <!-- Swiper -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    new Swiper(".swiper", {
+      loop: false,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      spaceBetween: 30,
+    });
+
+
+    // Yha se add krna h
+
+    // Fullscreen image functionality
+    const imageSlides = document.querySelectorAll('.swiper-slide img');
+    const fullscreenOverlay = document.getElementById('fullscreenOverlay');
+    const fullscreenImage = document.getElementById('fullscreenImage');
+    const closeBtn = document.querySelector('.close-btn');
+
+    imageSlides.forEach(img => {
+      img.addEventListener('click', () => {
+        fullscreenImage.src = img.src;
+        fullscreenImage.alt = img.alt;
+        fullscreenOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+      });
+    });
+
+    // Close fullscreen overlay
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeFullscreen();
+    });
+
+    fullscreenOverlay.addEventListener('click', () => {
+      closeFullscreen();
+    });
+
+    // Close with ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && fullscreenOverlay.classList.contains('active')) {
+        closeFullscreen();
+      }
+    });
+
+    function closeFullscreen() {
+      fullscreenOverlay.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+  </script>
+{% endblock %}

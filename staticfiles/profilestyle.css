@@ -1,0 +1,180 @@
+
+/* Profile Picture Hover Effect */
+.dsProfile {
+    width: 350px;
+    height: 350px;
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dsProfile:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Box Fade-In Animation */
+.dsBox {
+    margin: auto;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+    transform: translateY(30px);
+}
+
+/* Status Slide-Up Animation */
+.dsstatus {
+    margin-top: 2%;
+    opacity: 0;
+    animation: slideUp 0.7s ease 0.5s forwards;
+}
+
+/* Fade In Keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide Up Keyframes */
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Button Hover Effect */
+.btn-primary, .btn-secondary {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+    transform: translateY(-3px);
+    background-color: #0056b3;
+}
+
+
+@keyframes fadeInLink {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* New Landing Page Effects */
+.container {
+    opacity: 0;
+    animation: pageFadeIn 1s ease forwards;
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.card {
+    opacity: 0;
+    animation: cardFadeIn 1.2s ease 0.5s forwards;
+}
+
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+h5, p {
+    opacity: 0;
+    animation: textFadeIn 1s ease 0.7s forwards;
+}
+
+@keyframes textFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Blue tick */
+.YoDsprofile {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .profile-name {
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .verified-badge {
+    margin-left: 8px;
+    font-size: 30px;
+    color: #1DA1F2; /* Twitter blue color for the tick */
+    background-color: #e6f7ff;
+    border-radius: 50%;
+    padding: 2px 5px;
+    line-height: 1;
+    font-family: 'Arial',sans-serif;
+}
+
+.download-btn {
+    background: linear-gradient(45deg, #ff6b6b, #f06595, #845ef7);
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    border-radius: 99px;
+    transition: background 0.3s ease;
+  
+}
+  
+.download-btn a {
+    color: white;
+    text-decoration: none;
+}
+  
+.download-btn:hover {
+    background: linear-gradient(45deg, #845ef7, #f06595, #ff6b6b);
+}
+
+/* ipad mini portrait */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait){
+    #profile-picture-preview{
+        width: 200px;
+        height: 200px;
+    }
+}
+
+/* ipad pro portrait */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait){
+#profile-picture-preview{
+    width: 300px;
+    height:300px;
+    }
+}

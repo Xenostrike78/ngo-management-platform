@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Error</title>
+    <link rel="stylesheet" href="{% static "errorPageStyle.css" %}">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    {% if sus %}
+    <h1 class="UpperHead">
+      <b>Suspicious</b>
+      activity detected.
+    </h1>
+    <h5 class="h5Dhruv">
+      We've detected unusual or suspicious activity from your account or device.
+      As a precaution, access has been temporarily restricted to protect your
+      data and our platform.
+    </h5>
+    <h5 class="errorMessage">{{ sus }}</h5>
+    {% else %}
+    <h1 class="UpperHead">We're facing<br />an issue.</h1>
+    <h5 class="h5Dhruv">
+      We're currently facing an issue that may affect your experience. Our team
+      is actively working to resolve it as quickly as possible.
+    </h5>
+    <h5 class="h5Dhruv">Thank you for your patience and understanding.</h5>
+    {% if error %}
+    <h5 class="errorMessage">{{ error }}</h5>
+    {% endif %} {% endif %}
+    <a href="{% url 'home' %}">Go Back to Home</a>
+  </body>
+</html>

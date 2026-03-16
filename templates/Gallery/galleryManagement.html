@@ -1,0 +1,193 @@
+{% extends "userPanel/userBase.html" %}
+{% load static %}
+
+{% block title %}Manage Gallery{% endblock %}
+
+{% block tabCss %}
+<link rel="stylesheet" href="{% static 'HomeAnimation.css' %}">
+<link rel="stylesheet" href="{% static 'GalleryCss/galleryManagement2.css' %}">
+{% endblock %}
+
+{% block content %}
+  <!-- About us -->
+  <div class="dsFrame">
+    <h2>Manage Post</h2>
+    <br />
+  </div>
+
+  <div class="du-width-g">
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Upload New Post Section -->
+      <section class="card upload-section">
+        <h2>Upload New Post</h2>
+        <form id="upload-post-form" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="post-title">Post Title</label>
+            <!-- <input type="text" id="post-title" name="post-title" required /> -->
+            <textarea style="width: 100%; resize: none;" id="post-title" name="post-title" name="post-title" rows="2" cols="40" maxlength="200" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="post-date">Date</label>
+            <input type="date" id="post-date" name="post-date" required />
+          </div>
+
+          <!-- Image Upload -->
+          <div class="form-group">
+            <label for="post-media">Upload Photos (JPG, JPEG, PNG only, Max 1MB each)</label>
+            <input type="file" id="post-media" name="post-media" multiple accept=".jpg,.jpeg,.png" />
+            <p class="help-text">Select one or more images (max size 1MB each).</p>
+          </div>
+
+          <!-- YouTube Links -->
+          <div class="form-group" id="youtube-links-container">
+            <label>YouTube Video Links (will be auto-converted to embed URLs)</label>
+            <input type="url" name="youtube-link[]" class="youtube-link"
+              placeholder="https://www.youtube.com/watch?v=example" />
+          </div>
+          <button type="button" id="add-link-btn" class="upload-btn" style="margin-bottom: 10px; background:#28a745;">
+            + Add Another Link
+          </button>
+          <p class="help-text">You can add up to 10 YouTube video links.</p>
+
+          <button type="submit" class="upload-btn">Upload Post</button>
+        </form>
+      </section>
+<br>
+      <!-- Manage Existing Posts Section -->
+      <section class="card manage-section">
+        <h2>Manage Existing Posts</h2>
+        <div id="posts-list">
+          
+          {% for post in posts %}
+            <div class="post-item">
+              <a href="{% url 'single_post' post.id %}" target="_blank">
+              <div class="media-preview">
+                
+                {% with post.media_files.all|first as cover %}
+                  {% if cover.media_type == 'image' %}
+                    <img src="{{ cover.media_file.url }}" alt="Post Image {{forloop.counter}}" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+                  {% elif cover.media_type == 'video' %}
+                  <!-- <iframe width="100%" height="100%" src="{{ cover.media_file }}" frameborder="0" allowfullscreen></iframe> -->
+                  <img class="ytThumbnail" src="{{ cover.media_file }}" alt="YouTube Thumbnail" style="width:100%; display:block; border-radius:8px;">
+                  {% endif %}
+                {% endwith %}
+                  
+              </div>
+              </a>
+              <div class="post-info">
+                <h3>{{ post.caption }}</h3>
+                <p>Date: {{ post.event_date|date:"Y-m-d" }}</p>
+                <p class="small-text">{{ post.media_files.count }} media item{{ post.media_files.count|pluralize }}</p>
+              </div>
+              <button onclick="deletePost({{post.id}});" class="delete-btn" data-post-id="p-4">🗑 Delete</button>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+    </main>
+  </div>
+{% endblock %}
+
+{% block limitJS %}
+<script>
+  // Validate image size (1MB)
+  document.getElementById("post-media").addEventListener("change", function () {
+    if (this.files.length > 10) {
+      alert("You can only upload up to 10 images.");
+      this.value = ""; // Clear the input
+      return;
+    }
+    for (let file of this.files) {
+      if (file.size > 1024 * 1024) {
+        alert(`"${file.name}" exceeds 1MB limit. Please choose a smaller file.`);
+        this.value = ""; // Clear the input
+        break;
+      }
+    }
+  });
+
+  // Add multiple YouTube links (max 10)
+  const addLinkBtn = document.getElementById("add-link-btn");
+  const linksContainer = document.getElementById("youtube-links-container");
+
+  addLinkBtn.addEventListener("click", () => {
+    const linkInputs = linksContainer.querySelectorAll("input.youtube-link");
+    if (linkInputs.length >= 10) {
+      alert("You can only add up to 10 YouTube links.");
+      return;
+    }
+
+    const newInput = document.createElement("input");
+    newInput.type = "url";
+    newInput.name = "youtube-link[]";
+    newInput.className = "youtube-link";
+    newInput.placeholder = "https://www.youtube.com/watch?v=example";
+    linksContainer.appendChild(newInput);
+  });
+
+  // Change youtube link on input
+  // Run on input change (typing or pasting)
+  linksContainer.addEventListener("input", function (e) {
+    if (e.target.classList.contains("youtube-link")) {
+      let val = e.target.value.trim();
+
+      // Only change if it's a normal YouTube link
+      if (val.includes("youtube.com/watch?v=")) {
+        e.target.value = val.replace("watch?v=", "embed/");
+      }
+
+      // Also handle youtu.be short links
+      if (val.includes("youtu.be/")) {
+        let videoId = val.split("youtu.be/")[1];
+        e.target.value = "https://www.youtube.com/embed/" + videoId;
+      }
+    }
+  });
+
+</script>
+
+<!-- API TO DEL -->
+ <script>
+  function deletePost(postId) {
+      fetch(`/api/delete-post/${postId}/`, {
+        method: 'POST',
+        headers: {
+          "X-CSRFToken": "{{ csrf_token }}",
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            location.reload(); // or remove the post DOM element
+          } else {
+            alert("Failed to delete post.");
+          }
+        });
+    }
+ </script>
+
+
+<!-- For Thumbnail URL -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Select all images with class ytThumbnail
+    document.querySelectorAll("img.ytThumbnail").forEach(function (img) {
+      let src = img.getAttribute("src");
+
+      // Check if the src contains youtube embed link
+      let match = src.match(/youtube\.com\/embed\/([^?]+)/);
+
+      if (match && match[1]) {
+        let videoId = match[1]; // Extract video ID
+        let thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+        img.setAttribute("src", thumbnailUrl);
+      }
+    });
+  });
+</script>
+
+{% endblock %}

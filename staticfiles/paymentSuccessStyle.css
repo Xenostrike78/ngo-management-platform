@@ -1,0 +1,134 @@
+/* successStyles.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #1e3c72, #2a5298); /* Dark blue to soft blue gradient */
+    color: #fff;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.8s ease-in-out;
+    max-width: 90%;
+}
+
+.dsHeading {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #ffdd57; /* Warm yellow for the heading */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+.dsHeading::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    width: 50px;
+    height: 4px;
+    background-color: #ffdd57;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    animation: slideUnderline 1s ease-in-out infinite alternate;
+}
+
+small {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 1em;
+    opacity: 0.8;
+    color: #f0f0f0;
+    font-style: italic;
+}
+
+.retry-button {
+    text-decoration: none;
+    display: inline-block;
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+.retry-button button {
+    background: linear-gradient(135deg, #ffdd57, #ffb347); /* Gradient from warm yellow to soft orange */
+    color: #1e3c72; /* Dark blue for contrast */
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.retry-button button:hover {
+    background: linear-gradient(135deg, #ffb347, #ffdd57);
+    transform: translateY(-5px);
+}
+
+/* Animations */
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUnderline {
+    0% {
+        width: 50px;
+    }
+    100% {
+        width: 100px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive styling */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    .dsHeading {
+        font-size: 2em;
+    }
+
+    small {
+        font-size: 0.9em;
+    }
+
+    .retry-button button {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+}

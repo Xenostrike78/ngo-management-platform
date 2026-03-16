@@ -1,0 +1,160 @@
+{% extends 'userPanel/userBase.html' %}
+{% load static %}
+
+{% block title %}Member List {% endblock%}
+
+{% block tabCss %}
+<link rel="stylesheet" href="{% static "userMemberlistStyle.css" %}?v=20" />
+
+{% endblock %}
+
+{% block content %}
+    <div class="dsFrame">
+        <h2>Member List</h2>
+        {% if request.user.is_superuser %} 
+        <h5>Total Members: {{ totalUser }}<h5>
+        <a href="{% url "verifyMembers" %}"><h5>Member Verification <h5></a> 
+        <a href="{% url 'CheckDonation' %}">
+            <button type="button" class="btn btn-outline-primary">Check Donation</button>
+        </a>
+        {% endif %}
+    </div>
+    <br>
+    <div class="dsList">
+        {% if request.user.is_verified %}
+        <div class="dsCard container">
+            <div class="dsCardBody">
+                <form class="d-flex" role="search" method="POST">
+                    {% csrf_token %}
+                    <div class="searchBox">
+                      <input type="text" placeholder="Search" name="searchInput" value="{{ searchValue }}"/>
+                    </div>
+                    <div class="dsButton">
+                      <button type="submit">Search</button>
+                      <select required aria-label="Default select example" name="filtered">
+                        <option {% if filtered == "" %}selected{% endif %}>Filter</option>
+                        <option value="SN" {% if filtered == "SN" %}selected{% endif %}>UGMT ID</option>
+                        <option value="Name" {% if filtered == "Name" %}selected{% endif %}>Name</option>
+                        {% if request.user.is_superuser %}
+                        <option value="Email" {% if filtered == "Email" %}selected{% endif %}>Email</option>
+                        <option value="PhN" {% if filtered == "PhN" %}selected{% endif %}>Mobile</option>
+                        {% endif %}
+                      </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+        {% if request.user.is_superuser %}
+        <div class="container" style="text-align: right;">
+            <button type="button" class="download-btn" onclick="window.location.href='{% url 'download_users_data' %}?searchInput={{ searchValue }}&filtered={{ filtered }}'">    
+                Download
+            </button>
+        </div>
+        {% endif %}
+        <div class="mt-5 dsCustomWidth " style="width: 80%;margin:auto;">
+            <table class="table table-striped table-bordered table-hover">
+                {% csrf_token %}
+                <thead>
+                    <tr>
+                        <th style="width:7%">UGMT ID</th>
+                        <th style="width:10%">Name</th>
+                        {% if request.user.is_superuser %}
+                        <th>Email</th>
+                        <th style="width:15%">Designation</th>
+                        <th>Gender</th>
+                        <th>Blood Group</th>
+                        {% endif %}
+                        <th>State</th>
+                        {% if request.user.is_superuser %}
+                        <th>District</th>
+                        <th style="width:8%">Zip Code</th>
+                        <th>Mobile Number</th>
+                        <th style="width:13%">Aadhaar Number</th>
+                        {% endif %}
+                        <th style="width:9%">Register Date</th>
+                        {% if request.user.is_superuser %}
+                        <th style="width:12%">UserInfo</th>
+                        <th style="width:12%">Download</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody {% if request.user.is_verified == False %} class="blur-content" {% endif %}>
+                    {% if userData %}
+                    {% for user in userData %}
+                    <tr>
+                        <td class="serial-number">{% if request.user.is_verified == False %} X {% else %}  {{ user.id }} {% endif %} </td>
+                        <td>{% if request.user.is_verified == False %} XXXX {% else %} {{ user.name }} {% endif %} </td>
+                        {% if request.user.is_superuser %}
+                        <td>{{ user.email }} </td>
+                        <td>{{ user.designation }}</td>
+                        <td>{{ user.gender }}</td>
+                        <td>{{ user.blood_group }}</td>
+                        {% endif %}
+                        <td>{% if request.user.is_verified == False %} XXXX {% else %} {{ user.state }} {% endif %} </td>
+                        {% if request.user.is_superuser %}
+                        <td>{{ user.district }}</td>
+                        <td>{{ user.zip_code }}</td>
+                        <td>{{ user.mobile }}</td>
+                        <td>{{ user.aadhar }}</td>
+                        {% endif %}
+                        <td>{% if request.user.is_verified == False %} XXXX {% else %} {{ user.registerDate }} {% endif %} </td>
+                        {% if request.user.is_superuser %}
+                        <td><a href={% url "memberInfo" user.id %} target="_blank">Click here</a></td>
+                        <td><a href={% url "download_user_data" user.id %}>Download</a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="{% if request.user.is_superuser %}14{% else %}4{% endif %}" class="text-center">No user found</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+            <script>
+                function formatSerialNumber(number) {
+                    return 'UGMT'+number.toString().padStart(3,'0');
+                }
+            
+                document.addEventListener("DOMContentLoaded", function() {
+                    const serialNumberCells = document.querySelectorAll('.serial-number');
+                    serialNumberCells.forEach(cell => {
+                        const originalNumber = parseInt(cell.textContent, 10);
+                        cell.textContent = formatSerialNumber(originalNumber);
+                    });
+                });
+            </script>
+        </div>
+    </div>
+    <!-- Pagination -->
+    <br>
+    <div class="container d-flex justify-content-center align-items-center" style="padding-top: 2%;">
+      <nav aria-label="...">
+        <ul class="pagination">
+        {% if userData.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="{% url 'searchMembers' %}?page={{ userData.previous_page_number }}&searchInput={{ searchValue }}&filtered={{ filtered }}" style="font-size: 1.25rem; padding: 0.75rem 1.5rem;">Previous</a>
+          </li>
+        {% endif %}
+        {# Show the current page and adjacent pages #}
+        {% for i in userData.paginator.page_range %}
+            {% if i >= userData.number|add:-1 and i <= userData.number|add:1 %}
+                <li class="page-item {% if userData.number == i %} active {% endif %}">
+                    <a class="page-link" style="font-size: 1.25rem; padding: 0.75rem 1.5rem;" href="{% url 'searchMembers' %}?page={{ i }}&searchInput={{ searchValue }}&filtered={{ filtered }}">{{ i }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if userData.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="{% url 'searchMembers' %}?page={{ userData.next_page_number }}&searchInput={{ searchValue }}&filtered={{ filtered }}" style="font-size: 1.25rem; padding: 0.75rem 1.5rem;">Next</a>
+          </li>
+        </ul>
+        {% endif %}
+      </nav>
+    </div>
+    <br>
+    <br>
+{% endblock %}
+

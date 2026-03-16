@@ -1,0 +1,192 @@
+/* General Styling */
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  opacity: 0;
+  animation: slideIn 1s ease-in-out forwards;
+  animation-delay: 0.5s;
+}
+
+form {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.searchBox input {
+  width: 300px;
+  padding: 10px 15px;
+  border: 2px solid #ddd;
+  border-radius: 50px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.searchBox input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+  width: 500px;
+}
+
+.dsButton button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.dsButton button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 0 8px rgba(0, 91, 179, 0.5);
+}
+
+.dsButton select {
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 50px;
+  outline: none;
+  background-color: white;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.dsButton select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+  animation-delay: 1s;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #007bff;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Class for Dhruv Saxena's Row */
+.dhruv-row {
+  background-color: #58ff63 !important;
+}
+
+/* Responsive Table */
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* Responsive Styling */
+@media (max-width: 575.98px) {
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .searchBox input {
+    width: 320px;
+  }
+
+  .dsButton {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .dsButton button,
+  .dsButton select {
+    width: 48%;
+  }
+
+  .searchBox input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    width: 350px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  th,
+  td {
+    padding: 8px;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.slide-in {
+  opacity: 0;
+  animation: slideIn 1s ease-in-out forwards;
+  animation-delay: 0.5s;
+}

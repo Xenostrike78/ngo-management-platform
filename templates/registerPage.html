@@ -1,0 +1,501 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UGMT | Register</title>
+    <link rel="icon" href="{% static "/images/TabLogo.png" %}?v=2" type="image/x-icon">
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="{% static "/bootstrap/bootstrap.min.css" %}" />
+
+    <!-- Dhruv CSS -->
+    <link rel="stylesheet" href="{% static "NavbarStyle.css" %}" />
+    <link rel="stylesheet" href="{% static "loginStyle.css" %}" />
+    <link rel="stylesheet" href="{% static "bottomBarStyle.css" %}?v=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+  <body>
+    <!-- Top Logo Navbar -->
+    <div id="dsNav" class="d-flex justify-content-between align-items-center">
+      <a href="{% url 'home' %}" class="d-flex align-items-center">
+        <img
+          src="{% static "/images/logonavbar.gif" %}"
+          alt="Bootstrap"
+          width="100"
+          height="100"
+        />
+        <span id="dsNavName">Unique Group of Mankind Trust</span>
+      </a>
+    </div>
+
+    <!-- Form -->
+    <div class="dsForm">
+      <form method="POST" enctype="multipart/form-data" onsubmit="validatePasswords(event)" >
+        {% csrf_token %}
+        <!-- Name -->
+        <div class="mb-3">
+          <label for="exampleInputName1" class="form-label">Name <small style="color: darkred;">*</small></label>
+          <input
+          required
+          type="text"
+          class="form-control"
+          id="exampleInputName1"
+          maxlength="100"
+          name="Name"
+          aria-describedby="nameHelp"
+          />
+          <div id="nameHelp" class="form-text"></div>
+        </div>
+        <script>
+          window.onload = function() {
+            // Get today's date
+            const today = new Date();
+            
+            // Calculate the minimum age date (18 years ago, compare month and year only)
+            const minAgeDate = new Date(today.getFullYear() - 18, today.getMonth(), 1);
+            
+            // Calculate the maximum age date (50 years ago, compare month and year only)
+            const maxAgeDate = new Date(today.getFullYear() - 50, today.getMonth(), 1);
+        
+            // Format the dates in YYYY-MM-DD format
+            const minFormattedDate = minAgeDate.toISOString().split('T')[0];
+            const maxFormattedDate = maxAgeDate.toISOString().split('T')[0];
+            
+            // Set the min and max attributes to restrict the input date
+            const dobInput = document.getElementById("exampleInputDOB1");
+            dobInput.setAttribute("min", maxFormattedDate);
+            dobInput.setAttribute("max", minFormattedDate);
+          };
+        </script>
+        <!-- DOB -->
+        <div class="mb-3">
+          <label for="exampleInputDOB1" class="form-label">Date of Birth <small style="color: darkred;">*</small> <span style="color: rgb(85, 85, 85);">18-50</span></label>
+          <input
+          required
+            type="date"
+            class="form-control"
+            id="exampleInputDOB1"
+            name="DOB"
+            aria-describedby="dobHelp"
+          />
+          <div id="dobHelp" class="form-text"></div>
+        </div>
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="exampleInputEmail2" class="form-label">E-mail <small style="color: darkred;">*</small></label>
+          <input
+          required
+            type="email"
+            class="form-control"
+            id="exampleInputEmail2"
+            name="Email"
+            maxlength="50"
+            value = "{{ request.session.email }}" readonly
+            aria-describedby="emailHelp"
+          />
+          <div id="emailHelp" class="form-text"></div>
+        </div>
+        {% if EmailError %}
+          <div if="emailHelp" class="form-text" style="color: #FF9966;">
+            {{ EmailError }}
+          </div>
+        {% endif %}
+
+        <!-- Gender -->
+        <div class="mb-3">
+          <label for="exampleInputGender1" class="form-label">Gender <small style="color: darkred;">*</small></label>
+          <select required class="form-select" name="Gender" aria-label="Default select example">
+            <option value="" disabled selected>Select gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          <div id="genderHelp" class="form-text"></div>
+        </div>
+
+        <!-- Blood Group -->
+        <div class="mb-3">
+          <label for="exampleInputBloodGroup1" class="form-label"
+            >Blood Group <small style="color: darkred;">*</small></label
+          >
+          <select required class="form-select" name="BG" aria-label="Default select example">
+            <option value="" disabled selected>Select Blood Group</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+          </select>
+          <div id="bloodGroupHelp" class="form-text"></div>
+        </div>
+        
+        <!-- State -->
+        <div class="mb-3">
+          <label for="exampleInputState1" class="form-label">State <small style="color: darkred;">*</small></label>
+          <select
+          required
+            class="form-select"
+            id="stateSelect"
+            name="State"
+            aria-label="Default select example"
+            onchange="updateDistricts()"
+          >
+            <option value="" disabled selected>Select State</option>
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+            <option value="Assam">Assam</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Chhattisgarh">Chhattisgarh</option>
+            <option value="Goa">Goa</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="Haryana">Haryana</option>
+            <option value="Himachal Pradesh">Himachal Pradesh</option>
+            <option value="Jharkhand">Jharkhand</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Kerala">Kerala</option>
+            <option value="Madhya Pradesh">Madhya Pradesh</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Manipur">Manipur</option>
+            <option value="Meghalaya">Meghalaya</option>
+            <option value="Mizoram">Mizoram</option>
+            <option value="Nagaland">Nagaland</option>
+            <option value="Odisha">Odisha</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Sikkim">Sikkim</option>
+            <option value="Tamil Nadu">Tamil Nadu</option>
+            <option value="Telangana">Telangana</option>
+            <option value="Tripura">Tripura</option>
+            <option value="Uttar Pradesh">Uttar Pradesh</option>
+            <option value="Uttarakhand">Uttarakhand</option>
+            <option value="West Bengal">West Bengal</option>
+            <option value="Andaman and Nicobar Islands">
+              Andaman and Nicobar Islands
+            </option>
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Dadra and Nagar Haveli and Daman and Diu">
+              Dadra and Nagar Haveli and Daman and Diu
+            </option>
+            <option value="Delhi">Delhi</option>
+            <option value="Lakshadweep">Lakshadweep</option>
+            <option value="Puducherry">Puducherry</option>
+          </select>
+          <div id="stateHelp" class="form-text"></div>
+        </div>
+        <!-- District -->
+        <div class="mb-3">
+          <label for="exampleInputDistrict1" class="form-label">District <small style="color: darkred;">*</small></label>
+          <select
+          required
+            class="form-select"
+            id="districtSelect"
+            name="District"
+            aria-label="Default select example"
+          >
+            <option value="" disabled selected>Select District</option>
+            <!-- Districts will be populated based on selected state -->
+          </select>
+          <div id="districtHelp" class="form-text"></div>
+        </div>
+        <!-- Zip Code -->
+        <div class="mb-3">
+          <label for="exampleInputName1" class="form-label"
+            >Zip Code <small style="color: darkred;">*</small></label
+          >
+          <input
+          required
+            type="number"
+            class="form-control"
+            id="exampleInputName1"
+            name="ZipCode"
+            aria-describedby="nameHelp"
+            maxlength="6"
+            pattern="\d{6}"
+            title="Please enter exactly 6 digits"
+            oninput="this.value = this.value.slice(0, 6)"
+          />
+          <div id="nameHelp" class="form-text"></div>
+        </div>
+        <!-- NearBy -->
+        <div class="mb-3">
+          <label for="exampleInputName1" class="form-label">Near By <small style="color: darkred;">*</small></label>
+          <input
+          required
+            type="text"
+            class="form-control"
+            id="exampleInputName1"
+            maxlength="50"
+            name="nearBy"
+            aria-describedby="nameHelp"
+          />
+          <div id="nameHelp" class="form-text"></div>
+        </div>
+        <!-- Home Address -->
+        <div class="mb-3">
+          <label for="exampleInputName1" class="form-label">Home Address <small style="color: darkred;">*</small></label>
+          <input
+          required
+            type="text"
+            class="form-control"
+            id="exampleInputName1"
+            name="Address"
+            maxlength="150"
+            aria-describedby="nameHelp"
+          />
+          <div id="nameHelp" class="form-text"></div>
+        </div>
+        <!-- Mobile -->
+        <div class="mb-3">
+          <label for="exampleInputName1" class="form-label"
+            >Mobile <small style="color: darkred;">*</small></label
+          >
+          <input
+          required
+            type="number"
+            class="form-control"
+            id="exampleInputName1"
+            name="MobileNumber"
+            aria-describedby="nameHelp"
+            maxlength="10"
+            pattern="\d{10}"
+            title="Please enter exactly 10 digits"
+            oninput="this.value = this.value.slice(0, 10)"
+          />
+          <div id="nameHelp" class="form-text"></div>
+        </div>
+        {% if MobileError %}
+          <div if="emailHelp" class="form-text" style="color: #FF9966;">
+            {{ MobileError }}
+          </div>
+        {% endif %}
+        <div id="phoneHelp" class="form-text">Enter a 10-digit phone number.</div>
+        <!-- Mobile Home -->
+        <!-- <div class="mb-3">
+          <label for="exampleInputName1" class="form-label">Mobile Home <small style="color: darkred;">*</small></label>
+          <input
+          required
+            type="number"
+            class="form-control"
+            id="exampleInputName1"
+            name="MobileHome"
+            aria-describedby="nameHelp"
+            maxlength="10"
+            pattern="\d{10}"
+            title="Please enter exactly 10 digits"
+            oninput="this.value = this.value.slice(0, 10)"
+          />
+        </div> 
+        <div id="phoneHelp" class="form-text">Enter a 10-digit phone number.</div> -->
+        <!-- AADHAR NUMBER -->
+        <div class="mb-3">
+          <label for="exampleInputName1" class="form-label">Aadhaar Number <small style="color: darkred;">*</small></label>
+          <input
+          required
+            type="number"
+            class="form-control"
+            id="exampleInputName1"
+            name="Aadhar"
+            aria-describedby="nameHelp"
+            maxlength="12"
+            pattern="\d{10}"
+            oninput="this.value = this.value.slice(0, 12)"
+          />
+          <div id="nameHelp" class="form-text"></div>
+        </div>
+        {% if AadharError %}
+          <div if="aadharHelp" class="form-text" style="color: #FF9966;">
+            {{ AadharError }}
+          </div>
+        {% endif %}
+  
+  <!-- N O M I N E E  1  -  Details -->
+        <!-- Name -->
+        <div class="mb-3">
+          <label for="exampleInputName1" class="form-label">Nominee-1 Name <small style="color: darkred;">*required</small></label>
+          <input
+          required
+          type="text"
+          class="form-control"
+          id="exampleInputName1"
+          name="Nominee1Name"
+          maxlength="100"
+          aria-describedby="nameHelp"
+          />
+          <div id="nameHelp" class="form-text"></div>
+        </div>
+        <!-- Mobile -->
+        <div class="mb-3">
+          <label for="exampleInputName1" class="form-label">Nominee-1 Mobile <small style="color: darkred;">*required</small></label>
+          <input
+          required
+            type="number"
+            class="form-control"
+            id="exampleInputName1"
+            name="Nominee1Mobile"
+            aria-describedby="nameHelp"
+            maxlength="10"
+            pattern="\d{10}"
+            title="Please enter exactly 10 digits"
+            oninput="this.value = this.value.slice(0, 10)"
+          />
+        </div>
+        <div id="phoneHelp" class="form-text">Enter a 10-digit phone number.</div>
+        <!-- Relation -->
+        <div class="mb-3">
+          <label for="exampleInputName1" class="form-label">Nominee-1 Relation <small style="color: darkred;">*required</small></label>
+          <input
+          required
+          type="text"
+          class="form-control"
+          id="exampleInputName1"
+          name="Nominee1Relation"
+          maxlength="20"
+          aria-describedby="nameHelp"
+          />
+          <div id="nameHelp" class="form-text"></div>
+        </div>
+
+<!-- R E F E R R A L  -  Details -->
+        <!-- Referral UGMT id Number -->
+        <div class="mb-3">
+          <label for="exampleInputName1" class="form-label">Referral UGMT ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputName1"
+            name="ReferralID"
+            maxlength="10"
+            aria-describedby="nameHelp"
+          />
+          <div id="nameHelp" class="form-text"></div>
+        </div>
+        {% if ReferralidError %}
+          <div if="aadharHelp" class="form-text" style="color: #FF9966;">
+            {{ ReferralidError }}
+          </div>
+        {% endif %}
+
+
+
+        <!-- Create Password -->
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label"
+            >Create Password <small style="color: darkred;">*</small></label
+          >
+          <div class="eyeBox">
+            <input
+            required
+              type="password"
+              class="form-control"
+              name="Password"
+              id="Password1"
+              minlength="5"
+            />
+            <i class="fas fa-eye toggle-password" id="togglePassword1"></i>
+        </div>
+        </div>
+        <!-- Confirm Password -->
+        <div class="mb-3">
+          <label for="exampleInputPassword2" class="form-label"
+            >Confirm Password <small style="color: darkred;">*</small></label
+          >
+          <div class="eyeBox">
+          <input
+          required
+            type="password"
+            class="form-control"
+            id="Password2"
+            minlength="5"
+          />
+          <i class="fas fa-eye toggle-password" id="togglePassword2"></i>
+        </div>
+        </div>
+
+        <!-- Chronic Disease -->
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Any Chronic Disease</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1" value="Yes">
+              Yes
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="No" checked>
+            <label class="form-check-label" for="flexRadioDefault2">
+              No
+            </label>
+          </div>
+        </div>
+
+        <!-- Aadhar Upload -->
+        <div class="mb-3">
+          <label for="formFile" class="form-label">Upload Aadhaar Card</label>
+          <input name="aadharPicture" accept=".jpg, .jpeg, .png" class="form-control" type="file" id="formFile">
+          <div id="warningMessage" class="warning" style="color: red; font-size: 0.875rem; margin-top: 0.5rem"></div>
+        </div>
+        <br>
+        <!-- Declaration -->
+        <div class="form-check">
+          <input
+          required
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="defaultCheck1"
+          />
+          <label class="form-check-label" for="defaultCheck1">
+            मुझे UGMT से जुड़ने एवं सहयोग करने के संबंध में जानकारी प्राप्त हुई है। मैंने वेबसाइट पर नियम और शर्तें पढ़ ली हैं और मैं सभी नियमों और शर्तों से सहमत हूं। 
+            <b>मैं 200/- सदस्य शुल्क का भुगतान करने के लिए भी सहमत हूं, जो मुझे सदस्य बनने के लिए वार्षिक रूप से भुगतान करना होगा।</b> यदि मैं UGMT द्वारा बनाए गए नियमों के 
+            अनुसार सहयोग नहीं करता हूं तो मेरा नामांकित व्यक्ति सहयोग प्राप्त करने का दावा नहीं करेगा।
+          </label>
+        </div>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary">Pay & LogIn </button>
+      </form>
+    </div>
+    <br>
+    <br>
+    <br>
+    <!-- Footer -->
+    <div class="newArea">
+      <small style="padding-top: 20px;" class="Cre8mark"
+        ><a class="Cre8markLogo" href="https://www.cre8mark.in/"
+          >Developed by <b>CRE</b>8MARK</a
+        >
+      </small>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="{% static "/bootstrap/bootstrap.min.js" %}"></script>
+    <!-- Dhruv Custom JS -->
+    <script src="{% static "registration.js" %}"></script>
+    <script>
+      document.getElementById("formFile").addEventListener("change", function () {
+            const fileInput = this;
+            const warningMessage = document.getElementById("warningMessage");
+            const file = fileInput.files[0];
+            const maxSize = 500 * 1024; // 500KB in bytes
+  
+            if (file) {
+              if (file.size > maxSize) {
+                warningMessage.textContent =
+                  "File size exceeds 500KB. Please upload a smaller file.";
+                fileInput.value = ""; 
+              } else {
+                warningMessage.textContent = "";
+              }
+            }
+          });
+  </script>
+  </body>
+</html>
+
+
+
+

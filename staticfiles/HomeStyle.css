@@ -1,0 +1,580 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Notice Board */
+.noticeBoard {
+  padding: 2%;
+  text-align: center;
+  background-color: #1d3d51;
+}
+
+.noticeHeading {
+  color: #e46345;
+}
+
+.noticeText {
+  color: white;
+  padding: 0.5%;
+}
+
+/* Article Section */
+.dsarticle {
+  margin: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* News Section */
+.newsSection {
+  margin-top: 5%;
+  text-align: center;
+  width: 80%;
+  margin: auto;
+}
+
+.newsSection ul {
+  list-style-type: none;
+}
+
+.newHead {
+  border-bottom: 2px solid #230823;
+  width: 100px;
+  margin: 0 auto;
+}
+
+/* Bank Card */
+.dsBankCard {
+  width: 45%;
+  margin: auto;
+  border: 2px solid #230823;
+  font-size: x-large;
+}
+
+/* Video Card */
+.video-card {
+  margin-top: 5%;
+  height: 100%;
+  width: 60%;
+  margin: auto;
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Social Media and Cards */
+.dsMar {
+  margin-top: 5%;
+  margin-bottom: 2%;
+}
+
+.card-group .card {
+  margin-right: 15px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #343a40;
+}
+
+#carouselExampleIndicators button {
+  border-radius: 15px;
+}
+
+.dsSet {
+  margin: auto;
+  width: 60%;
+}
+
+.MemHead {
+  border-bottom: 2px solid #230823;
+  text-align: center;
+  margin-top: 5%;
+}
+
+.dsMem {
+  border: none;
+}
+
+.dsText {
+  text-align: center;
+  color: white;
+}
+
+.dsFbBg {
+  background-color: #0865fe;
+}
+
+.dsYtBg {
+  background-color: #ff0000;
+}
+
+.dsXBg {
+  background-color: #000;
+}
+
+.dsTelBg {
+  background-color: #039be6;
+}
+
+.dsSocial {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.dsSocialCard {
+  width: 100%;
+  margin: 2%;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.dsSocialCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(1px);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.dsSocialCard:hover::before,
+.dsSocialCard:active::before {
+  opacity: 1;
+}
+
+.dsSocialCard:hover,
+.dsSocialCard:active {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* WhatsApp Logo */
+.whatsappLogo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.whatsappLogo a img {
+  width: 50px;
+  height: 50px;
+  transition: transform 0.3s;
+}
+
+.whatsappLogo a img:hover {
+  transform: scale(1.1);
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Animation and Styling */
+.dsFrame {
+  margin: auto;
+  width: 80%;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.dsFrame h2 {
+  margin-top: 4%;
+  font-size: xxx-large;
+  animation: slideIn 1s ease-out;
+}
+
+.dsTextCen {
+  text-align: center;
+  margin-top: 5%;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.dsCardImgFull {
+  margin-top: 5%;
+  animation: slideIn 1s ease-out;
+}
+
+.dsImgCard h5 {
+  font-size: xx-large;
+  margin: 1.75%;
+  margin-bottom: 5%;
+}
+
+.dsImgCard p {
+  text-align: left;
+  animation: fadeIn 2s ease-in-out;
+}
+
+/* Body Styling */
+.dsBody {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 60vh;
+  background: url("images/byron-johnson-pj1jt4vBGZY-unsplash.jpg") #030728
+    no-repeat center;
+}
+
+.container.swiper-container {
+  position: relative;
+}
+
+/* Card List */
+.card-list .card-item {
+  color: #fff;
+  width: 400px;
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  backdrop-filter: blur(30px);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.card-list .card-item .user-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 40px;
+  border: 3px solid #fff;
+  padding: 4px;
+}
+
+.card-list .card-item .user-profession {
+  font-size: 1.15rem;
+  color: #e3e3e3;
+  font-weight: 500;
+  margin: 14px 0 40px;
+}
+
+/* Swiper Buttons */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.swiper-button-next {
+  right: 10px;
+}
+
+.swiper-button-prev {
+  left: 10px;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px;
+}
+
+.imgBox {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.responsive-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+
+/* Responsive Design */
+
+/* Mobile View */
+@media (max-width: 575.98px) {
+  .newsSection {
+    width: 80%;
+  }
+
+  .dsBankCard {
+    width: 97%;
+  }
+
+  .video-card {
+    width: 95%;
+  }
+
+  .dsSet {
+    width: 100%;
+    display: flex;
+  }
+
+  .dsSocial {
+    flex-direction: column;
+  }
+
+  .dsSocial .card {
+    width: 200px;
+    height: 200px;
+    margin: 10px auto;
+  }
+
+  .BottomBar {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .dsHeadLink {
+    margin: 10px 0;
+  }
+}
+
+/* iPad Mini Portrait */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .dsBankCard {
+    width: 550px;
+  }
+
+  .video-card {
+    width: 90%;
+  }
+
+  .card-list {
+    margin: 10%;
+  }
+
+  .img-fluid {
+    height: 36vh;
+  }
+}
+
+/* iPad Mini Landscape */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .dsBankCard {
+    width: 650px;
+  }
+
+  .video-card {
+    width: 90%;
+  }
+
+  .card-list {
+    margin: 120px;
+    margin-top: 3%;
+    margin-bottom: 3%;
+  }
+}
+
+
+.dsarticle .card-body h5.card-title {
+  margin-top: 0;
+}
+
+.dsarticle .row.g-0 {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dsarticle .col-md-4 {
+  flex: 1 1 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .dsarticle .col-md-4 {
+    flex: 0 0 auto;
+    max-width: 33.3333%;
+  }
+}
+
+.dsarticle .img-fluid {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1027 / 588;
+  object-fit: cover;
+}
+
+.dsarticle .col-md-8 {
+  flex: 1;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (max-width: 767.98px) {
+  .dsarticle .col-md-8 {
+    padding-top: 15px;
+  }
+}
+
+.Newcard {
+  width: 80%;
+  max-width: 900px;
+  margin: auto;
+  --bg: #e8e8e8;
+  --contrast: #f9f9f9;
+  --grey: #93a1a1;
+  position: relative;
+  padding: 20px;
+  background-color: var(--bg);
+  border-radius: 20px;
+  box-shadow: rgba(50, 50, 93, 0.15) 0px 20px 40px -20px, rgba(0, 0, 0, 0.2) 0px 15px 30px -15px;
+  transition: transform 0.3s ease-in-out;
+}
+
+
+.Newcard-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-conic-gradient(var(--bg) 0.0001%, var(--grey) 0.0001%) 60% 60%/600% 600%;
+  filter: opacity(5%) contrast(100%);
+  border-radius: 20px;
+}
+
+.Newcard-inner {
+  padding: 4%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--contrast);
+  border-radius: 15px;
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.Newcard-inner h2 {
+  font-size: 1.8em;
+  font-weight: 700;
+  color: #464646;
+  margin-bottom: 15px;
+}
+
+.Newcard-inner strong {
+  font-size: 1.1em;
+  color: #333;
+}
+
+.Newcard-inner div {
+  font-size: 1em;
+  color: #555;
+  text-align: left;
+}
+
+.Newcard-inner div strong {
+  color: #000;
+}
+
+@media (max-width: 768px) {
+  .Newcard {
+      width: 90%;
+      padding: 15px;
+  }
+
+  .Newcard-inner {
+      padding: 3%;
+  }
+
+  .Newcard-inner h2 {
+      font-size: 1.5em;
+  }
+
+  .Newcard-inner strong {
+      font-size: 1em;
+  }
+
+  .Newcard-inner div {
+      font-size: 0.9em;
+  }
+}
+.newUppercard {
+  max-width: 100%; /* Max width for better readability */
+  margin: 20px auto; /* Center the card */
+  padding: 30px; /* Add padding inside the card */
+  border-radius: 20px; /* Softer rounded corners */
+  background: linear-gradient(145deg, #ffffff, #d4d4d4); /* Gradient background for a premium feel */
+  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.1), -8px -8px 20px rgba(255, 255, 255, 0.9); /* Luxurious shadow effect */
+  font-family: 'Lato', sans-serif; /* Premium-looking font */
+  color: #333; /* Elegant text color */
+  line-height: 1.7;
+}
+
+.newUppercard p {
+  font-size: 18px; /* Readable font size */
+  margin-bottom: 20px; /* Space between paragraphs */
+}
+
+.newUppercard a {
+  color: #b93ea5; /* Match with your brand's theme */
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 2px solid #b93ea5; /* Elegant link styling */
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.newUppercard a:hover {
+  color: #777ac6;
+  border-bottom: 2px solid #777ac6;
+}
+
+@media (max-width: 768px) {
+  .newUppercard {
+      padding: 20px;
+      font-size: 16px; /* Adjust font size for mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .newUppercard {
+      padding: 15px;
+      font-size: 14px; /* Further adjust font size for small screens */
+  }
+}

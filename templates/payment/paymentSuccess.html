@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static "/images/TabLogo.png" %}?v=2" type="image/x-icon">
+    <title>Payment Success</title>
+    <link rel="stylesheet" href="{% static "paymentSuccessStyle.css" %}">
+</head>
+<body>
+    <div class="container">
+        <div class="dsHeading">
+            Payment Successful
+        </div>
+        <!-- Countdown timer element -->
+        <div id="countdown">You will be redirected to the LogIn page in 5 seconds</div>
+        <br>
+        <br>
+        <a href="{% url 'login' %}" class="retry-button">
+            <button>Go to Login</button>
+        </a>
+    </div>
+
+    <script>
+        // Initial countdown time in seconds
+        let countdownTime = 5;
+
+        // Function to update the countdown timer
+        function updateCountdown() {
+            if (countdownTime > 0) {
+                document.getElementById("countdown").textContent = `You will be redirected to the LogIn page in ${countdownTime} seconds`;
+                countdownTime--;
+            } else {
+                // Redirect when countdown reaches 0
+                window.location.href = "{% url 'login' %}";
+            }
+        }
+
+        // Update the countdown every second
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>

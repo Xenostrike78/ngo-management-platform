@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Vyavastha List{% endblock %}
+
+{% block link %}<link rel="stylesheet" href="{% static "vyawasthList.css" %}?v=1" />{% endblock %}
+
+
+
+{% block content %}
+
+    <!-- List -->
+<div class="dsFrame">
+    <h2>Vyavastha List</h2>
+</div>
+
+<div class="dsBankInfo">
+    <div class="card border-dark mb-3 dsBankCard">
+        <div class="card-header" style="font-weight: 500;">Bank Information</div>
+        <div class="card-body">
+            <p style="font-weight: bold; color: #444; text-align: center;">
+                आपका योगदान, उनकी आशा: हर दान मायने रखता है।
+            </p><br>
+            <p class="card-text">
+                <b>Account Name:</b> UNIQUE GROUP OF MANKIND TRUST<br />
+                <b>Account Number:</b> 00000043270211162<br />
+                <b>Bank:</b> STATE BANK OF INDIA<br />
+                <b>Branch:</b> Main Branch, Moradabad<br />
+                <b>IFS Code:</b> SBIN0000682<br />
+            </p>
+            <a href="{% url "TrustDonation" %}">
+            <br>
+            <button type="button" class="btn btn-primary">Donate Now</button>
+            </a>
+            <br>
+            <br>
+            <p style="font-weight: bold; color: #444; text-align: center;">
+                देना केवल दान देने के बारे में नहीं है, यह कुछ बदलाव लाने के बारे में है
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

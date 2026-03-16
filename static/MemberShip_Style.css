@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Body Styling */
+body {
+  background: linear-gradient(to bottom, #fff8e1, #fff4e3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  padding: 20px;
+}
+
+.card {
+  margin: auto;
+  max-width: 1000px;
+  width: 90%;
+  padding: 5%;
+  text-align: center;
+}
+
+/* Responsive */
+
+@media only screen and (max-width: 768px) {
+  body {
+    background-color: #ffcccb;
+    padding: 10px;
+  }
+
+  .card {
+    padding: 10%;
+    font-size: 0.9rem;
+  }
+
+  .btn_container {
+    margin-top: 20px;
+  }
+}
+
+.dsModi{
+  width: 150px;
+}
