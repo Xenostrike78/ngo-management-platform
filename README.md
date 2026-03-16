@@ -103,15 +103,11 @@ python manage.py migrate
 
 This will automatically create the development database.
 
----
-
 ### 5. Create Admin User
 
 ```
 python manage.py createsuperuser
 ```
-
----
 
 ### 6. Run the Development Server
 ---
