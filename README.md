@@ -124,4 +124,3 @@ python manage.py createsuperuser
 # License
 
 This project is provided for **educational and demonstration purposes**.
-f
